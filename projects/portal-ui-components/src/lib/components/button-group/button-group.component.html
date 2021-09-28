@@ -1,0 +1,6 @@
+<ul id="{{id}}" class="btn-group">
+	<li id="{{id + '_' + option.name}}" *ngFor="let option of options"
+	  [ngClass]="determineClass(option)" (click)="onClick(option.type, option.value)">
+		{{option.name}}
+	</li>
+</ul>

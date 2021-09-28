@@ -1,0 +1,47 @@
+.accordion {
+    padding: 0 20px;
+    &__item {
+        &__title {
+            &.divide {
+                border-bottom: 1px solid rgba(35, 31, 32, 0.37);
+            }
+
+            h3 {
+                cursor: pointer;
+                font-size: 1.2rem;
+                font-weight: 900;
+                color: #4e4e4e;
+                margin: 15px 0;
+                position: relative;
+                span {
+                    text-align: right;
+                    position: absolute;
+                    right: 0;
+                }
+            }
+        }
+
+        &__body {
+            height: 0;
+            overflow-x: hidden;
+            transition: ease-in-out 900ms height;
+            &--open {
+                min-height: 50px;
+                height: auto;
+                transition: ease-in-out 900ms height;
+            }
+        }
+    }
+
+    .status {
+        position: relative !important;
+
+        .fas {
+            color: var(--light-grey);
+            font-size: 10px !important;
+        }
+    }
+    .active {
+        color: var(--active-color) !important;
+    }
+}

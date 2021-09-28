@@ -1,0 +1,32 @@
+<form [formGroup]="scopeSelectorForm" class="filter-nodes-select-field d-block" autocomplete="off">
+    <mat-form-field appearance="standard" class="siteSelectorFormField">
+      <mat-select #siteSelector formControlName="scopeSelection" [placeholder]="placeholder" (selectionChange)="valueChanged($event)" [multiple]="false" (openedChange)="openedChange($event)"
+        [disableOptionCentering]="true" [disableRipple]="true" panelClass="filter-nodes-select headerSelector" multiple>
+        
+        <!-- Show search only if more than 4 elements -->
+        <div class="searchArea">
+        <!-- <div class="searchArea"> -->
+          <mat-form-field appearance="standard" class="w-100 searchFormField mat-elevation-z4">
+            <input matInput #siteSearchInput [(ngModel)]="searchText" autocomplete="off" placeholder="Search" class="w-100" [ngModelOptions]="{standalone: true}" (ngModelChange)="filterResults()" (keydown)="handleInput($event)">
+            <div matSuffix>
+                <!-- <i class="fas fa-search appIcon" *ngIf="siteSearchInput.value.length == 0"></i> -->
+                <i class="fas fa-times appIcon" (click) = "siteSearchInput.value = ''; clearSearch()" *ngIf="siteSearchInput.value.length > 0"></i>
+            </div>
+          </mat-form-field>
+        </div>
+        <div class="selectionOptions">
+          <ng-container *ngFor="let group of getKeys()" >
+            <mat-optgroup  [label]="group"*ngIf="filteredScope[group].length">
+              <mat-option *ngFor="let option of filteredScope[group]" [value]="option[valueKey]">
+                {{key?option[key]:option}}
+              </mat-option>
+            </mat-optgroup>
+        </ng-container>
+        
+        <div class="p-l-10" *ngIf="getKeys().length==0"> No results</div>
+        </div>
+        
+      </mat-select>
+    </mat-form-field>
+  </form>
+  

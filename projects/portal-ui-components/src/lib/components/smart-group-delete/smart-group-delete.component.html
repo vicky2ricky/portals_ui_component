@@ -1,0 +1,17 @@
+<h1 mat-dialog-title class="text-uppercase sg-delete-title">Delete smart group</h1>
+<div class="sg-delete-content" mat-dialog-content>
+    <div class="row align-items-center">
+        <div class="col-2 text-center">
+            <i class="fa fa-exclamation-triangle color-primary fa-lg"></i>
+        </div>
+        <div class="col-10 p-l-0">
+            Are you sure you want to delete
+            <span class="color-primary">{{data?.dis}}</span>?
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions class="pull-right">
+    <button class="text-uppercase btn color-primary" (click)="onNoClick()">Cancel</button>
+    <span class="seperator">|</span>
+    <button class="text-uppercase btn color-primary" [mat-dialog-close]="'delete'" cdkFocusInitial>Delete</button>
+</div>

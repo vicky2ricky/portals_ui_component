@@ -1,0 +1,278 @@
+
+
+  .fs-vacations {
+    &__header {
+      &__label {
+        float: left;
+        margin: 0px;
+        margin-top: 15px;
+      }
+      &__add {
+        cursor: pointer;
+        margin-top: 15px;
+        text-align: right;
+        color: #333333;
+        font-size: 16px;
+        float: right;
+        font-weight: bolder;
+        &:after {
+          content: "+";
+          font-size: 20px;
+          color: var(--primary);
+          font-weight: 600;
+        }
+      }
+    }
+  
+    &__body {
+      padding-top: 5px;
+  
+      
+    }
+  }
+  
+  
+  
+  .confirmation-dialog {
+    display: flex;
+    flex-direction: column;
+  
+    &__message {
+      display: flex;
+      justify-content: center;
+      flex: 90%;
+      align-items: center;
+      margin: 25px auto;
+      &__icon {
+        font-size: 25px;
+        color: var(--primary);
+      }
+      &__text {
+        padding-left: 10px;
+      }
+    }
+    &__buttongroup {
+      display: flex;
+      justify-content: flex-end;
+      margin: 15px;
+      &__cancel {
+        background: transparent;
+        color: var(--primary);
+        border: none;
+        outline: none;
+        font-size: 16px;
+        cursor: pointer;
+        &:after {
+          content: "|";
+          color: gray;
+          font-size: 19px;
+          line-height: 0px;
+          margin-left: 13px;
+        }
+        &:hover{
+          background-color: rgba(var(--primary-rgb), 0.2)
+        }
+      }
+      &__ok {
+        background: transparent;
+        color: var(--primary);
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 16px;
+        &:hover{
+          background-color: rgba(var(--primary-rgb), 0.2)
+        }
+      }
+     
+    }
+  }
+  
+  ::ng-deep {
+    .mat-table.other-roles-tbl {
+      /* icons */
+      .mat-sort-header-pointer-left,
+      .mat-sort-header-pointer-right,
+      .mat-sort-header-pointer-middle,
+      .mat-sort-header-stem {
+        display: none;
+      }
+    
+      .mat-sort-header-arrow {
+        opacity: 1 !important;
+        transform: translateY(0%) !important;
+        .mat-sort-header-indicator {
+          top: 0px;
+          height: 25px;
+          transform: translateY(-6px) !important;
+          height: 25px;
+          &::before {
+            font-family: "Font Awesome 5 Free";
+            content: "\f106";
+            position: absolute;
+            top: 3px;
+            opacity: 0.5;
+            font-size: 12px;
+          }
+          &::after {
+            font-family: "Font Awesome 5 Free";
+            content: "\f107";
+            position: absolute;
+            font-size: 12px;
+            bottom: 3px;
+            opacity: 0.5;
+          }
+        }
+      }
+    
+      [aria-sort="descending"] {
+        .mat-sort-header-arrow {
+          .mat-sort-header-indicator {
+            &::after {
+              opacity: 1 !important;
+            }
+          }
+        }
+      }
+      [aria-sort="ascending"] {
+        .mat-sort-header-arrow {
+          .mat-sort-header-indicator {
+            &::before {
+              opacity: 1 !important;
+            }
+          }
+        }
+      }
+    
+      /* ends */
+      width: 100%;
+      max-width: 100%;
+      overflow: auto;
+      margin-bottom: 10px;
+      /* display: block; */
+      border-collapse: collapse;
+      box-shadow: none;
+      margin: 0px;
+      .mat-sort-header-container {
+        justify-content: center;
+      }
+      tr {
+        &.mat-header-row {
+          background: rgba(0, 0, 0, 0.1);
+          height: 30px;
+          display: table-row;
+          .mat-header-cell {
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+            margin: 0 auto;
+            align-self: center;
+            word-wrap: initial;
+            display: table-cell;
+            padding: 0px 5px;
+            line-break: unset;
+            width: fit-content;
+            white-space: nowrap;
+            overflow: hidden;
+            vertical-align: middle;
+            text-align: center;
+            position: relative;
+            &:after {
+              content: "";
+              border-right: 1px solid var(--line);
+              position: absolute;
+              display: block;
+              height: calc(100% - 10px);
+              top: 5px;
+              bottom: 0px;
+              right: 0;
+            }
+            &:last-child {
+              &::after {
+                border-right: 1px solid transparent;
+              }
+            }
+          }
+        }
+    
+        &.mat-row {
+          height: 30px;
+          .mat-cell {
+            color: rgba(51, 51, 51, 0.6);
+            min-width: 140px;
+            padding: 5px;
+            font-size: 14px;
+            text-align: center;
+            border-bottom-style: none;
+          }
+          &:nth-child(even) {
+            background: #f8f9fa;
+          }
+        }
+      }
+    }
+    
+    .mat-form-field.mat-focused .mat-form-field-label {
+      color: rgba(0, 0, 0, 0.54);
+    }
+    .mat-form-field.mat-focused .mat-form-field-ripple {
+      background-color: rgba(0, 0, 0, 0.87);
+    }
+    
+    .noData {
+      text-align: center;
+      padding: 5px;
+      margin-top: 5px;
+    }
+    .vacation-modal{
+      .modal {
+        &__body {
+          &__content {
+            min-height: 0% !important;
+          }
+        }
+      }
+    }
+    
+  
+    .md-drppicker td.active,
+    .md-drppicker td.active:hover {
+      background-color: var(--primary) !important;
+    }
+  
+    .md-drppicker td.in-range {
+      background-color: #ee9a7f;
+    }
+  }
+  
+  
+  .isVacationModalShow {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+  }
+  
+  .isVacationModalHide {
+    display: none;
+  }
+  
+  .isConfirmationModalShow {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+  }
+  
+  .isConfirmationModalHide {
+    display: none;
+  }
+  

@@ -1,0 +1,205 @@
+.scheduler {
+    &__slider {
+      font-family: "Lato", sans-serif;
+      &__labels {
+        display: flex;
+        justify-content: center;
+    
+        &__flexalign {
+          display: flex;
+          flex-direction: row;
+    
+          &__flexrightalign {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+       
+        &__noDataactive {
+          height: 3rem;
+          width: 2rem;
+        }
+    
+        &__noDatalabelinactiveclass {
+          color: var(--light-grey);
+          height: 1rem;
+          font-size: 1.3rem;
+          margin-top: 0.5rem;
+          margin-left: 1rem;
+          margin-bottom: 0.5rem;
+        }
+    
+      }
+      &__component {
+        margin-top: 3%;
+        margin-left: 8%;
+        width: 85%;
+        height: 12px;
+        border: 1px solid rgba(91, 92, 95, 0.3);
+        border-radius: 6px;
+        border-style: solid;
+        border-color: rgba(91, 92, 95, 0.3);
+        background-color: rgba(91, 92, 95, 0.3);
+        position: relative;
+  
+        &__button {
+          position: absolute;
+          top: -8px;
+          z-index: 1;
+        }
+  
+        &__heatingdesiredtempbutton {
+          margin-left: -3px;
+          border-top: 25px solid var(--danger);
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          height: 0;
+          width: 5px;
+          cursor: pointer;
+        }
+  
+        &__heatingdesiredtempbuttonsmall {
+          margin-left: 1px;
+          border-top: 20px solid var(--danger);
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          height: 0%;
+          width: 3px;
+          cursor: pointer;
+          z-index: 2;
+          margin-top: 3px;
+        }
+  
+        &__heatingdesiredtemplabel {
+          margin-left: -5pt;
+          margin-top: -42pt;
+          font-size: 16pt;
+          color: var(--danger);
+        }
+  
+        &__coolingdesiredtempbutton {
+          margin-left: -3px;
+          border-top: 25px solid rgb(146, 190, 217);
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          height: 0;
+          width: 5px;
+          cursor: pointer;
+        }
+  
+        &__coolingdesiredtempbuttonsmall {
+          margin-left: 1px;
+          border-top: 20px solid rgb(146, 190, 217);
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          height: 0%;
+          width: 3px;
+          cursor: pointer;
+          z-index: 2;
+          margin-top: 3px;
+        }
+  
+        &__noDatadesiredtempbutton {
+          border-top: 25px solid var(--light-grey);
+          margin-left: -3px;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          height: 0;
+          width: 17px;
+          z-index: 2;
+        }
+  
+        &__coolingdesiredtemplabel {
+          margin-left: -5pt;
+          margin-top: -42pt;
+          font-size: 16pt;
+          color: rgb(146, 190, 217);
+        }
+  
+        &__heatingRangeclass {
+          width: 85%;
+          height: 12px;
+          border-radius: 6px;
+          border-style: solid;
+          border-color: var(--danger);
+          background-color: var(--danger);
+          // box-shadow: 1px 1px 1px 1px var(--primary);
+          opacity: 0.8;
+          position: absolute;
+          cursor: pointer;
+          z-index: 1;
+          margin-top: -2px;
+        }
+  
+        &__coolingRangeclass {
+          width: 85%;
+          height: 12px;
+          border-radius: 6px;
+          border-style: solid;
+          border-color: rgb(146, 190, 217);
+          background-color: rgb(146, 190, 217);
+          // box-shadow: 1px 1px 1px 1px rgb(109, 172, 214);
+          opacity: 0.8;
+          position: absolute;
+          cursor: pointer;
+          z-index: 1;
+          margin-top: -2px;
+        }
+  
+        &__deadbandRangeclass {
+          height: 12px;
+          border-style: solid;
+          border-radius: 9px;
+          border-color: #6d6e71;
+          background-color: #6d6e71;
+          position: absolute;
+          cursor: pointer;
+          z-index: 1;
+          margin-top: -2px;
+        }
+  
+        &__marks {
+          margin-top: 4px;
+          position: absolute;
+          height: 9%;
+          display: inline-block;
+          -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+          border-color: var(--white);
+          background-color: var(--white);
+        }
+  
+        &__markslabel {
+          position: absolute;
+          height: 1.5px;
+          width: 12pt;
+          display: inline-block;
+          color: #000000;
+          opacity: 0.6;
+        }
+  
+        &__heatingbuttonlook {
+          cursor: pointer;
+          margin-left: -1%;
+          text-align: center;
+          height: 24px;
+          width: 24px;
+          background-color: var(--danger);
+          border-radius: 13pt;
+          box-shadow: 0 0 5px 15px rgba(226, 67, 1, 0.2);
+        }
+  
+        &__coolingbuttonlook {
+          cursor: pointer;
+          margin-left: -0.5%;
+          text-align: center;
+          height: 24px;
+          width: 24px;
+          background-color: rgb(146, 190, 217);
+          border-radius: 13pt;
+          box-shadow: 0 0 5px 15px rgba(146, 190, 217, 0.2);
+        }
+      }
+    }
+  }
+  

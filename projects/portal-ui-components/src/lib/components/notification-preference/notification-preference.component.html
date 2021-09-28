@@ -1,0 +1,57 @@
+<div class="col-xs-12 user-management-table">
+    <div class="user-management-t-head">
+        <ng-container>
+
+            <ul class="d-row" >
+                <ng-container *ngFor="let column of columns">
+                    <li>
+                        {{column?.label}}
+                    </li>
+                </ng-container>
+            </ul>
+
+
+        </ng-container>
+
+    </div>
+    <div class="user-management-t-body">
+        <!-- <ng-container [ngTemplateOutlet]="alertTblRows"
+        [ngTemplateOutletContext]="{ $implicit: false,alerts:alerts}">
+        </ng-container> -->
+        <ng-container *ngIf="alerts; else navSkeleton">
+            <ng-container *ngFor="let alert of alerts;let i=index">
+                <ul class="d-flex w-100 p-5 d-row">
+                    
+                    
+                    <li class="d-flex align-items-center">
+                        {{alert.alert.mTitle}}
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <mat-checkbox class="m-r-10" [checked]="alert.notificationTypes.indexOf('EMAIL')>-1" (change)="toggleSelection($event,1,alert)"></mat-checkbox>
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <mat-checkbox class="m-r-10" [checked]="alert.notificationTypes.indexOf('SMS')>-1" (change)="toggleSelection($event,2,alert)"></mat-checkbox>
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <mat-checkbox class="m-r-10" [checked]="alert.notificationTypes.indexOf('MOBILE_PUSH')>-1" (change)="toggleSelection($event,3,alert)"></mat-checkbox>
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <mat-checkbox class="m-r-10" [checked]="alert.notificationTypes.indexOf('BROWSER')>-1" (change)="toggleSelection($event,4,alert)"></mat-checkbox>
+                    </li>
+                    <li class="d-flex align-items-center" [matTooltip]="(!alert.notificationTypes.length) ? 'Atleast single notification channel to selected.' : ''">
+                        <mat-checkbox class="m-r-10" [disabled]="!alert.notificationTypes.length" [checked]="alert.notifyWhenFixed" (change)="toggleNotifyWhenFixed($event,alert)"></mat-checkbox>
+                    </li>
+            
+                </ul>
+            </ng-container>
+        </ng-container>
+        <ng-template #navSkeleton>
+            <ul class="list-style">
+                <li *ngFor="let number of [0,1,2,3,4,5,6]">
+                    <ngx-skeleton-loader></ngx-skeleton-loader>
+                </li>
+            </ul>
+        </ng-template>
+        <div *ngIf="alerts?.length === 0" class="text-center m-5-a">No alerts found.</div>
+    </div>
+</div>

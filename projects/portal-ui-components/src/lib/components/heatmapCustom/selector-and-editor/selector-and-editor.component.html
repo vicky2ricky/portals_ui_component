@@ -1,0 +1,42 @@
+<div class="section">
+  <mat-form-field appearance="standard" class="vizSelectorFormField underlineDisable"
+      [style.visibility]="editing? 'hidden': 'visible'">
+      <i matPrefix class="fas fa-angle-down customDropdownIcon"></i>
+
+      <!-- {{selectedEntity?.name}} -->
+
+      <mat-select panelClass="selector" disableOptionCentering  placeholder="Select Visualization"
+          (selectionChange)="changeSelection($event)" #selector>
+
+          <mat-select-trigger>
+              {{selectedEntity?.name}}
+          </mat-select-trigger>
+
+          <div class="selectorArea">
+            <mat-option *ngFor="let selection of selections" [value]="selection"
+                [attr.title]="selection?.name">
+                {{selection.name}}
+            </mat-option>
+          </div>
+      </mat-select>
+
+      <div matSuffix class="selectedActions" *ngIf="selectedEntity">
+          <i class="fas fa-pen appIcon" (click)="editSelectionName($event)"></i>
+          <i class="fas fa-trash appIcon" (click)="selectionDelete($event)"></i>
+      </div>
+  </mat-form-field>
+
+  <mat-form-field hintLabel="Max 100 characters" appearance="standard" class="entityInputFormField"
+      *ngIf="editing">
+      <input matInput #nameInput maxlength="100" autocomplete="off" [value]="selectedEntity?.name">
+      <mat-hint align="end">{{nameInput.value?.length || 0}}/100</mat-hint>
+
+      <div matSuffix>
+          <i class="fas fa-times appIcon" (click)="discardNameEdit($event)"></i>
+          <i class="fas fa-check appIcon" (click)="saveNameEdit(nameInput.value)"></i>
+      </div>
+  </mat-form-field>
+
+  <button mat-button color="primary" (click)="dialogClose()" class="closeButton">CLOSE</button>
+</div>
+

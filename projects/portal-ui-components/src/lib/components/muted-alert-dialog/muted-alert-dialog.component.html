@@ -1,0 +1,79 @@
+<div class="cntr">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12 heading-text">
+                    Mute Alerts For
+                </div>
+            </div>
+            <div class="row">
+                <mat-form-field (click)="$event.stopPropagation()" class="search-input" [floatLabel]="'never'">
+                    <input autocomplete="off" matInput placeholder="Search" #searchTextField
+                        (keyup)="search(searchTextField?.value)" />
+                    <i class="fas fa-search suffix-icon" matSuffix></i>
+                </mat-form-field>
+            </div>
+            <div class="row table-header">
+                <div class="col-md-7">
+                    Equip
+                </div>
+                <div class="col-md-5">
+                    Mute Status
+                </div>
+            </div>
+            <div class="row scroll-ctnr">
+                <mat-accordion [multi]="true" *ngFor="let ccu of ccus" class="col-md-12">
+                    <mat-expansion-panel (opened)=true [expanded]="true" #expansionPanel>
+                        <mat-expansion-panel-header (click)="expandPanel(expansionPanel, $event)" class="p-r-8">
+                            <div class="col-md-7">
+                                <div class="m-l-24 p-5">{{ccu.ccuName}}</div>
+                            </div>
+                            <div class="col-md-5 p-r-10">
+                                <div class="muteStatus"
+                                    [ngClass]="{'justify-content-start': ccu['disableDateTimeThru']}">
+                                    <i [ngClass]="{ 'fa-volume-off': !ccu['disableDateTimeThru'],'fa-volume-mute': ccu['disableDateTimeThru']}"
+                                        class="fas" customToolTip [isHandlePos]="false"
+                                        [contentTemplate]="dateranger"></i><span>{{dateFormat(ccu)}}</span>
+                                </div>
+                                <ng-template #dateranger>
+                                    <div class="dateRangePopup">
+                                        <puc-add-edit [id]=ccu.deviceId [type]="'ccu'" [isAlert] = "true"
+                                            [endTime]="ccu['disableDateTimeThru']" (formatDate)="onDateChanged($event)">
+                                        </puc-add-edit>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </mat-expansion-panel-header>
+                        <div class="row" *ngFor="let equip of ccu.equips">
+                            <div class="col-md-7">
+                                <div class="m-l-24 p-5">{{equip.equipName}}</div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="muteStatus"
+                                    [ngClass]="{'justify-content-start': equip['disableDateTimeThru']}">
+                                    <i [ngClass]="{ 'fa-volume-off': !equip['disableDateTimeThru'],'fa-volume-mute': equip['disableDateTimeThru']}"
+                                        class="fas" customToolTip [isHandlePos]="false"
+                                        [contentTemplate]="dateranger"></i><span>
+                                        {{dateFormat(equip)}}</span>
+                                </div>
+                                <ng-template #dateranger>
+                                    <div class="dateRangePopup">
+                                        <puc-add-edit [id]=equip.equipId [type]="'equip'" [isAlert]="true"
+                                            [endTime]="equip['disableDateTimeThru']"
+                                            (formatDate)="onDateChanged($event)">
+                                        </puc-add-edit>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+            <div mat-dialog-actions class="btns-ctnr">
+                <button class="btn btn-text color-primary text-uppercase" (click)="onNoClick()">Cancel</button>
+                <button class="btn btn-text color-primary text-uppercase" [mat-dialog-close]="tempHolder"
+                    cdkFocusInitial>Apply</button>
+            </div>
+        </div>
+    </div>
+</div>

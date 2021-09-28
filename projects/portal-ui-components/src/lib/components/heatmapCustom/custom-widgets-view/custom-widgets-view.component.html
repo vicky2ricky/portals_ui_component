@@ -1,0 +1,33 @@
+<puc-accordion blockTitle="Custom Widgets" isOpen="true">
+  <div class="custom-chart-section">
+    <div class="localAnalytics" *ngIf="customWidgets?.local?.length > 0">
+      <div *ngFor="let localCustomWidget of customWidgets?.local; let i = index">
+        <puc-widget-accordion [widget] = localCustomWidget [widgetName]= localCustomWidget.name [userAction] = actionUsed [isDragDisabled] = "true"
+          [widgetIndex]=i  [scope]=scope [heatmapConfigId]=heatmapConfigId [customDateRange] = customDateRange
+          (dataRecievedEvt)="dataRecieved($event)">
+        </puc-widget-accordion>
+      </div>
+    </div>
+    <div class="localAnalytics" *ngIf="customWidgets?.local?.length === 0">
+      <div class="emptyMsg">
+        <p>There are no <b>Custom Widgets</b> configured for this <span class="capitalize">{{scopeLabel}}</span></p>
+      </div>
+    </div>
+  </div>
+</puc-accordion>
+<puc-accordion blockTitle="Custom Global Widgets" isOpen="true">
+  <div class="custom-chart-section">
+    <div class="globalAnalytics" *ngIf="customWidgets?.global?.length > 0 && customWidgets.global.length > this.hiddenAccordions">
+      <div *ngFor="let globalCustomWidget of customWidgets?.global">
+        <puc-widget-accordion [widget] = globalCustomWidget [widgetName]= globalCustomWidget.name isGlobal="true" [userAction] = actionUsed
+          [heatmapConfigId]=heatmapConfigId [customDateRange] = customDateRange (accordionHiddenEvt)="accordionHiddenEvt($event)" (dataRecievedEvt)="dataRecieved($event)">
+        </puc-widget-accordion>
+      </div>
+    </div>
+    <div class="globalAnalytics p-t-0" *ngIf="customWidgets.global.length === 0 || customWidgets.global.length === this.hiddenAccordions">
+      <div class="emptyMsg">
+        <p>There are no <b>Global Widgets</b> configured for this <span class="capitalize">{{scopeLabel}}</span></p>
+      </div>
+    </div>
+  </div>
+</puc-accordion>

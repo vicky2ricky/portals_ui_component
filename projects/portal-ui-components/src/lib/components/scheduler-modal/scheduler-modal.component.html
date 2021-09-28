@@ -1,0 +1,74 @@
+<h3>
+    DESIRED TEMPERATURE
+  </h3>
+  <div [style.height.px]="sliderDisplayFlag?70:110" class="slider" (click)="$event.stopPropagation()">
+    <puc-user-intent-rangeslider-scheduler
+     [sliderDisplay]='sliderDisplayFlag'
+      [schedulerMin]='buildingLimits.min' [schedulerMax]='buildingLimits.max' [schedulerStep]='1'
+      [schedulerZoneName]='zoneName' (schedulerDesiredTempsChanged)='schedulerDesiredTempsChangedHandler($event)'>
+    </puc-user-intent-rangeslider-scheduler>
+  </div>
+  
+  <div class="section" (click)="$event.stopPropagation()">
+  
+    <div class="setTime">
+      <div class="shiftDown">
+      <select id="startTime" [(ngModel)]="startTime" [disabled]="(!sliderDisplayFlag)">
+        <option *ngFor="let time of timerArray" value="{{time}}">{{time}}</option>
+      </select>
+      <span>TO</span>
+      <select id="endTime" [(ngModel)]="endTime" [disabled]="(!sliderDisplayFlag)">
+        <option *ngFor="let time of timerArray" value="{{time}}">{{time}}</option>
+      </select>
+    </div>
+    </div>
+    <div class="daySection">
+      <p>
+        APPLIES TO
+      </p>
+      <button id="{{'daySelect' + i}}" *ngFor="let day of dayLable; let i = index" [value]="i" class="inactive"
+        (click)="toggleDaySelection(i)" [class.active]="totalDaysSelected.indexOf(i)>-1"
+        [disabled]="(sliderDisplayFlag==false) || ((type=='edit') && (sliderDisplayFlag==true))">{{day}}</button>
+    </div>
+  </div>
+  <div class="scheduleAlert" *ngIf="alertMessage.length>0">
+    <i class="confirmation-dialog__message__icon fas fa-exclamation-triangle"></i> <span *ngIf="!isConfirmDelete && (this.decisionArray.length)">Zone Schedule is outside building schedule currently set. Proceed with trimming the zone schedules to be within the building schedule </span><br>
+    <span [innerHTML]="alertMessage"></span>
+  </div>
+  <div class="submit">
+    <i *ngIf="type=='edit'" class="fas fa-trash" (click)="sliderDisplayFlag && deleteSchedule()"></i>
+    <div>
+      <button class="button cancel" *ngIf="type=='new'" (click)="cancel()">CANCEL</button>
+      <button class="button" *ngIf="type=='new' && !isZoneTrim" (click)="sliderDisplayFlag && addEntry()">SAVE</button>
+      <!-- <button class="button cancel" *ngIf="type=='edit' && isConfirmDelete"
+        (click)="cancelDelete()">CANCEL</button> -->
+      <button class="button cancel" *ngIf="type=='edit'&& !(alertArr.length)" (click)="cancel()">
+        CANCEL
+      </button>
+      <button (click)="sliderDisplayFlag && saveEditSchedule()" *ngIf="(type=='edit' && !isConfirmDelete) && !this.alertArr.length && !isZoneTrim">
+        SAVE
+      </button>
+      <button class="button cancel" *ngIf="(type=='edit' && !isConfirmDelete) && (this.alertArr.length)"
+        (click)="reEdit()">
+        Re-Edit</button>
+      <button (click)="confirmDeleteSchedule()" *ngIf="(type=='edit' && isConfirmDelete) && !(this.alertArr.length)">
+        DELETE
+      </button>
+      <button class="button" (click)="cancel()" *ngIf="(type=='edit' && isConfirmDelete) && (this.alertArr.length)">
+        Cancel
+      </button>
+      <!-- <button class="button" (click)="removeSchEntry()"
+        *ngIf="(type=='edit' && isConfirmDelete) && (this.alertArr.length)">
+        Force-Trim
+      </button> -->
+      <button class="button" (click)="forceTrim()" *ngIf="type=='edit' && (alertArr.length)">
+        Force-Trim
+      </button>
+      <button class="button" (click)="reEdit()" *ngIf="isZoneTrim">
+        Re-Edit
+      </button>
+      <button class="button" (click)="zoneForceTrim()" *ngIf="isZoneTrim">
+        Force-Trim
+      </button>
+    </div>
+  </div>

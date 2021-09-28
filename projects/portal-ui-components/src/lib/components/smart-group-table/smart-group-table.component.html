@@ -1,0 +1,299 @@
+<div class="row">
+    <!-- <div class="col-md-6 col-xs-12 col-sm-12" *ngIf="hasSearch">
+        <mat-form-field class="example-full-width" [floatLabel]="'never'">
+            <input matInput placeholder="Search" [(ngModel)]="searchText" />
+            <i class="fas fa-search" (click)="search()" matSuffix></i>
+        </mat-form-field>
+    </div> -->
+    <!-- <div class="col-md-6 col-xs-12 col-sm-12" *ngIf="hasPagination">
+        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+            (page)="pageEvent = $event">
+        </mat-paginator>
+    </div> -->
+</div>
+<div class="custom-table">
+    <div class="t-head">
+        <ng-container *ngIf="hasSort;else noSortHeader">
+            <ul class="d-row" matSort (matSortChange)="sortData($event)">
+                <ng-container *ngFor="let column of columns">
+                    <li *ngIf="column?.hasSort;else noSortCol" mat-sort-header="{{column.key}}">
+                        {{column?.label}}
+                    </li>
+                    <ng-template #noSortCol>
+                        <li>
+                            {{column?.label}}
+                        </li>
+                    </ng-template>
+                </ng-container>
+            </ul>
+        </ng-container>
+        <ng-template #noSortHeader>
+            <ul class="d-row">
+                <li *ngFor="let column of columns">
+                    {{column?.label}}
+                </li>
+            </ul>
+        </ng-template>
+    </div>
+    <!-- <ul id="infinite-scroller" fsInfiniteScroller style="display: none;" scrollPerecnt="70" immediateCallback="true"
+        [scrollCallback]="scrollCallback">
+        <li *ngFor="let item of dummyData">{{item.title}}</li>
+    </ul> -->
+    <!-- <fs-infinite-scroll (scrolled)="onScroll()" [ngClass]="{'tuners-sg':(pageType == 'tuners')}"> -->
+
+
+    <div #container class="t-body" cdkScrollable [ngClass]="{'tuners-sg':(pageType == 'tuners')}">
+        <ng-container *ngIf="type == 'sg'">
+            <ul class="d-row" *ngFor="let element of _data;let i = index;">
+                <li class="flex-column">
+                    <div class="sg-info d-flex">
+                        <div class="w-100">
+                            <i class="fas "
+                                [ngClass]="{'fa-angle-down': (element?.isExpanded),'fa-angle-right': (!element?.isExpanded)}"
+                                (click)="toggle(element)"></i>
+                            <puc-checkbox [type]="'full'" (change)="onChange(element,i,'',$event)"
+                                [checked]="element?.selected" [hasFill]="true" [fill]="element?.fill"></puc-checkbox>
+                            <ng-container *ngIf="(id && !isFac);else lblName">
+                                <mat-form-field class="sg-name-input" [floatLabel]="'never'">
+                                    <input matInput type="text" trim="blur" [(ngModel)]="element.dis" placeholder=""
+                                        autocomplete="off" />
+                                    <span matSuffix> <i class="fas fa-pencil-alt edit-icon"></i></span>
+                                    <span class="required-field" matPrefix>*</span>
+                                    <mat-hint *ngIf="!(element?.dis)">
+                                        <span class="mat-error">Smartgroup name is required</span>
+                                    </mat-hint>
+                                </mat-form-field>
+                            </ng-container>
+                            <ng-template #lblName>
+                                <span class="sg-name relative">
+                                    {{element?.dis}}
+                                    <span class="manage-options"
+                                        *ngIf="(element?.type !== 'ungrouped') && !id && pageType != 'tuners'">
+                                        <i class="fas fa-pencil-alt fa-xs"
+                                            [routerLink]="['/smartgroups',element._id]"></i>
+                                        <i class="fas fa-trash-alt fa-xs" (click)="delete(element,i)"></i>
+                                    </span>
+                                </span>
+                            </ng-template>
+                        </div>
+                        <div class="flex-basis-18 text-center">
+                            {{(element.updatedAt)?(element?.updatedAt | pucDate:'D/MM/YY- h:mm:ss A'):''}}
+                        </div>
+                    </div>
+                    <ul class="d-row building-ul" [ngClass]="{'hidden': (!element?.isExpanded)}"
+                        *ngFor="let building of element?.children">
+                        <li>
+                            <ul class="d-flex w-100 p-5">
+                                <li class="flex-basis-15" *ngIf=!isFac></li>
+                                <li class="building-li">
+                                    <div class="b-name">
+                                        <i class="fas " [ngClass]="{'fa-angle-down': (building?.isExpanded),'fa-angle-right': (!building?.isExpanded),
+                                                'hidden':!(building?.children?.length)
+                                            }" (click)="toggle(building)"></i>
+                                        <puc-checkbox [type]="'full'"
+                                            [ngClass]="{'no-child-checkbox':!(building?.children?.length)}"
+                                            *ngIf="(pageType == 'tuners' && _level == 'building') || pageType == 'sg'"
+                                            (change)="onChange(building,i,element,$event)" [hasFill]="true"
+                                            [fill]="building?.fill" [checked]="building?.selected"></puc-checkbox>
+                                        {{building?.dis}}
+
+                                    </div>
+                                </li>
+                                <li class="flex-basis-20 justify-content-center">
+                                    <span class="p-0-5">
+                                        {{building?.address?.geoAddr}}
+                                        {{(building?.address?.geoCity)?',':''}}
+                                        {{building?.address?.geoCity}}
+                                        {{(building?.address?.geoState)?',':''}}
+                                        {{building?.address?.geoState}}
+                                    </span>
+                                </li>
+                                <li class="justify-content-center">
+                                    <span class="p-0-5">
+                                        {{building?.ccuCount}}
+                                    </span>
+                                </li>
+                                <li class="justify-content-center">
+                                    <span class="p-0-5">
+                                        {{building?.zoneCount}}
+                                    </span>
+                                </li>
+                                <li *ngIf=!isFac></li>
+                            </ul>
+                        </li>
+                        <li class="zone-li">
+                            <div class="zones-container w-100" [ngClass]="{'hidden': (!building?.isExpanded)}">
+
+                                <ul class="ccu-selection" *ngIf="building?.children?.length">
+
+                                    <li>
+                                        <div class="w-100">
+                                            <span class="ccu-name">
+                                                <i class="fas "
+                                                    [ngClass]="{'fa-angle-down': (building.ccusExpanded),'fa-angle-right': (!building.ccusExpanded)}"
+                                                    (click)="toggleCCUs(building)"></i>
+                                                CCUS
+
+                                            </span>
+                                            <span class="select-zones">
+                                                <puc-checkbox [type]="'full'"
+                                                    (change)="toggleZones(building,i,true,$event)"
+                                                    [checked]="building.isSelectedZones">
+                                                </puc-checkbox> Select All
+                                            </span>
+                                            <span class="unselect-zones" *ngIf="pageType != 'tuners'">
+                                                <puc-checkbox [type]="'full'"
+                                                    (change)="toggleZones(building,i,false,$event)"
+                                                    [ngClass]="{'selected':(building.isUnSelectedZones)}"
+                                                    [checked]="building?.isUnSelectedZones">
+                                                    {{building.isUnSelectedZones}}
+                                                </puc-checkbox> Exclude All Zones
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ng-container *ngIf="building.ccusExpanded">
+                                    <ng-container [ngTemplateOutlet]="ccuTpl"
+                                        [ngTemplateOutletContext]="{ $implicit: building,i:i}">
+                                    </ng-container>
+
+                                </ng-container>
+                            </div>
+                        </li>
+
+                    </ul>
+
+
+                </li>
+            </ul>
+        </ng-container>
+        <ng-container *ngIf="type == 'building'">
+            <ul class="d-row building-ul" *ngFor="let building of _data;let i = index;">
+                <li>
+                    <ul class="d-flex w-100 p-5">
+                        <li class="building-li">
+                            <div class="b-name">
+                                <i class="fas " [ngClass]="{'fa-angle-down': (building?.isExpanded),'fa-angle-right': (!building?.isExpanded),
+                                        'hidden': !(building?.children?.length)
+                                    }" (click)="toggle(building)"></i>
+                                <puc-checkbox [type]="'full'"
+                                    *ngIf="(pageType == 'tuners' && _level == 'building') || pageType == 'sg'"
+                                    (change)="onChange(building,i,'',$event)" [hasFill]="true"
+                                    [fill]="building?.fill" [checked]="building?.selected"></puc-checkbox>
+                                {{building?.dis}}
+                            </div>
+                        </li>
+                        <li class="justify-content-center">
+                            <span class="p-0-5">
+                                {{building?.address?.geoAddr}}
+                                {{(building?.address?.geoCity)?',':''}}
+                                {{building?.address?.geoCity}}
+                                {{(building?.address?.geoState)?',':''}}
+                                {{building?.address?.geoState}}
+                            </span>
+                        </li>
+                        <li class="justify-content-center">
+                            <span class="p-0-5">
+                                {{building?.ccuCount}}
+                            </span>
+                        </li>
+                        <li class="justify-content-center">
+                            <span class="p-0-5">
+                                {{building?.zoneCount}}
+                            </span>
+                        </li>
+                        <li *ngIf=!isFac>
+
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <div class="zones-container w-100" [ngClass]="{'hidden': (!building?.isExpanded)}">
+
+                        <ul class="ccu-selection" *ngIf="building?.children?.length">
+
+                            <li>
+                                <div class="w-100">
+                                    <span class="ccu-name">
+                                        <i class="fas "
+                                            [ngClass]="{'fa-angle-down': (building.ccusExpanded),'fa-angle-right': (!building.ccusExpanded)}"
+                                            (click)="toggleCCUs(building)"></i>
+                                        CCUS
+
+                                    </span>
+                                    <span class="select-zones">
+                                        <puc-checkbox [type]="'full'" (change)="toggleZones(building,i,true,$event)"
+                                            [checked]="building.isSelectedZones">
+                                        </puc-checkbox> Select All
+                                    </span>
+
+                                </div>
+                            </li>
+                        </ul>
+                        <ng-container *ngIf="building.ccusExpanded">
+                            <ng-container [ngTemplateOutlet]="ccuTpl"
+                                [ngTemplateOutletContext]="{ $implicit: building,i:i}">
+                            </ng-container>
+
+                        </ng-container>
+                    </div>
+                </li>
+
+            </ul>
+
+        </ng-container>
+
+        <ng-template #ccuTpl let-building let-i="i">
+            <ul *ngFor="let ccu of building?.children" class="ccu-ul">
+
+                <li class="flex-column">
+                    <div class="ccu-name p-5">
+                        <i class="fas "
+                            [ngClass]="{'fa-angle-down': (ccu?.isExpanded),'fa-angle-right': (!ccu?.isExpanded),'hidden':!(ccu?.children?.length)}"
+                            (click)="toggle(ccu)"></i>
+                        <puc-checkbox [type]="'full'"
+                            *ngIf="(pageType == 'tuners' && _level == 'system') || pageType == 'sg'"
+                            (change)="onChange(ccu,i,building,$event)" [hasFill]="true" [fill]="ccu?.fill"
+                            [checked]="ccu?.selected"></puc-checkbox>
+                        {{ccu?.dis}}
+
+                    </div>
+                    <div class="module-container" [ngClass]="{'hide': (!ccu?.isExpanded)}">
+                        <ul class="zone-ul">
+                            <li *ngFor="let zone of ccu?.children" class="flex-column">
+                                <div class="zone-name">
+                                    <i class="fas "
+                                        [ngClass]="{'fa-angle-down': (zone?.isExpanded),'fa-angle-right': (!zone?.isExpanded),'hidden':!(zone?.children?.length)}"
+                                        (click)="toggle(zone)"></i>
+                                    <puc-checkbox [type]="'full'"
+                                        *ngIf="(pageType == 'tuners' && _level == 'zone') || pageType == 'sg'"
+                                        (change)="onChange(zone,i,ccu,$event)" [hasFill]="true" [fill]="zone?.fill"
+                                        [checked]="zone?.selected">
+                                    </puc-checkbox>
+                                    {{zone?.dis}}
+                                </div>
+
+                                <ul class="module-ul" [ngClass]="{'hide': (!zone?.isExpanded)}">
+                                    <li *ngFor="let module of zone?.children">
+                                        <div class="module-name">
+                                            <puc-checkbox [type]="'full'" (change)="onChange(module,i,zone,$event)"
+                                                *ngIf="(pageType == 'tuners' && _level == 'module') || pageType == 'sg'"
+                                                [checked]="module?.selected">
+                                            </puc-checkbox>
+                                            {{module?.dis}}
+                                        </div>
+
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                </li>
+            </ul>
+        </ng-template>
+        <p class="text-center" *ngIf="searchText && !_data.length">No match found.</p>
+
+    </div>
+    <!-- </fs-infinite-scroll> -->
+</div>

@@ -1,0 +1,104 @@
+h4 {
+    margin: 0;
+    font-weight: 400;
+}
+hr {
+    border: 0;
+    border-top: 2px solid lightgray;
+}
+
+:host ::ng-deep {
+    .md-drppicker {
+        top : unset !important;
+        left: auto !important;
+        bottom: 13% !important;
+        right: 10% !important;
+        width: 100vw !important;
+        svg {
+            display: none !important;
+        }
+        .btn {
+            border: 1px solid !important;
+            margin: 5px;
+            width: 62px;
+        }
+        .btn.btn-default::after {
+            display: none !important;
+        }
+        .calendar-time {
+            display: inline;
+            .select .select-item {
+                font-size: 11px !important;
+            }
+        }
+    }
+    .left {
+        border: none !important;
+    }
+    // .ranges {
+    //     ul {
+    //         display: none !important;
+    //     }
+    // }
+    // .right {
+    //     .calendar-table {
+    //         display: none !important;
+    //     }
+    // }
+}
+.addPopup {
+    font-size: 12px;
+    text-align: left;
+    padding: 10px;
+    line-height: 24px;
+    box-shadow: -2px 7px 28px -6px rgba(0, 0, 0, 0.69);
+    
+}
+label {
+    display: block;
+    cursor: pointer;
+    user-select: none;
+    text-align: left;
+    & + label {
+        margin-top: 7px;
+    }
+    input {
+        display: none;
+        & + span {
+            display: inline-block;
+            position: relative;
+            padding-left: 20px;
+            &:before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 5px;
+                left: 0px;
+                border-radius: 50%;
+                margin-right: 5px;
+                width: 12px;
+                height: 12px;
+                border: 1px solid var(--primary);
+                background: var(--white);
+            }
+            &:after {
+                content: "";
+                display: block;
+                width: 8px;
+                height: 8px;
+                background: var(--primary);
+                position: absolute;
+                border-radius: 50%;
+                top: 8px;
+                left: 3px;
+                opacity: 0;
+                transform: scale(0, 0);
+                transition: all 0.2s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+            }
+        }
+        &:checked + span:after {
+            opacity: 1;
+            transform: scale(1, 1);
+        }
+    }
+}

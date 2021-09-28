@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <clipPath id="clip-pie_chart">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="pie_chart" clip-path="url(#clip-pie_chart)">
+    <g id="noun_Graph_2155103" transform="translate(-46 121)">
+      <g id="Group_2" data-name="Group 2" transform="translate(54 -113)">
+        <path id="Path_5" data-name="Path 5" d="M26.128,959.362v15.872H42A15.872,15.872,0,0,0,26.128,959.362Zm-3.256,3.256A15.872,15.872,0,1,0,38.744,978.49H22.872V962.618Z" transform="translate(-7 -959.362)" fill="#f3646a"/>
+      </g>
+    </g>
+  </g>
+</svg>

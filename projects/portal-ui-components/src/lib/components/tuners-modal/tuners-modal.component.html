@@ -1,0 +1,152 @@
+<h1 mat-dialog-title class="text-uppercase tuners-modal-title m-b-0">Apply Tuners</h1>
+<div mat-dialog-content>
+    <p>Are you sure you want to apply the following tuners?</p>
+    <ul class="list-none d-row p-l-10" *ngFor="let element of buildingsData;let i = index;">
+        <li class="flex-column">
+            <div class="sg-info d-flex">
+                <div class="w-100">
+                    <span class="sg-name relative">
+                        <label class="text-primary text-xs">Smart Group:&nbsp;</label>{{element?.dis}}
+                    </span>
+                </div>
+            </div>
+            <ul class="list-none d-row building-ul" *ngFor="let building of element?.children">
+                <li>
+                    <ul class="list-none d-flex w-100 p-5 list-none">
+                        <li class="building-li w-100">
+                            <div class="b-name">
+                                <label class="text-primary text-xs">Building:&nbsp;</label> {{building?.dis}}
+                                <span *ngIf="building?.tunerName" class="color-primary p-l-10 ">
+                                    <span class="text-truncate bu-tuner-name"
+                                        title="{{building.tunerName}} {{(building?.unit)?'('+(building.unit)+')':''}}">
+                                        {{building.tunerName}} {{(building?.unit)?'('+(building.unit)+')':''}}
+                                    </span>
+                                    <ng-container *ngIf="building?.isApplicable;else notApplicableTpl">
+
+                                        <span class="gray"> Lvl {{building.level}}:</span> {{(building.val) || '-'}} <i
+                                            class="fas fa-long-arrow-alt-right"></i>
+                                        <span class="gray"> Lvl {{priorityLevel}}:</span>
+                                        {{((building.newVal == 'N')?'-':(building.newVal))}}
+
+                                    </ng-container>
+
+
+                                </span>
+                            </div>
+                        </li>
+                        <li [ngClass]="{'flex-basis-50': (tunerLevel != 'building'),
+                        'flex-basis-30': (tunerLevel == 'building')
+                    }">
+                            <span class="p-0-5">
+                                {{building?.address?.geoAddr}}
+                                {{(building?.address?.geoCity)?',':''}}
+                                {{building?.address?.geoCity}}
+                                {{(building?.address?.geoState)?',':''}}
+                                {{building?.address?.geoState}}
+                            </span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="zones-container w-100">
+                        <ng-container [ngTemplateOutlet]="ccuTpl"
+                            [ngTemplateOutletContext]="{ $implicit: building,i:i}">
+                        </ng-container>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ng-template #ccuTpl let-building let-i="i">
+        <ul *ngFor="let ccu of building?.children" class="ccu-ul list-none">
+
+            <li class="flex-column">
+                <div class="ccu-name p-5">
+                    <label class="text-primary text-xs">System:&nbsp;</label>
+
+                    {{ccu?.dis}}
+                    <span *ngIf="ccu?.tunerName" class="color-primary p-l-10 ">
+                        <span class="text-truncate" title="{{ccu.tunerName}} {{(ccu?.unit)?'('+(ccu.unit)+')':''}}">
+                            {{ccu.tunerName}} {{(ccu?.unit)?'('+(ccu.unit)+')':''}}
+                        </span>
+                        <ng-container *ngIf="ccu?.isApplicable;else notApplicableTpl">
+                            | <span class="gray"> Lvl {{ccu.level}}:</span>
+
+                            {{(ccu.val) || '-'}} <i class="fas fa-long-arrow-alt-right"></i>
+                            <span class="gray"> Lvl {{priorityLevel}}:</span> {{((ccu.newVal == 'N')?'-':(ccu.newVal))}}
+
+                        </ng-container>
+
+
+                    </span>
+
+
+                </div>
+                <div class="module-container">
+                    <ul class="list-none zone-ul list-none">
+                        <li *ngFor="let zone of ccu?.children" class="flex-column">
+                            <div class="zone-name">
+                                <label class="text-primary text-xs">Zone:&nbsp;</label>
+                                {{zone?.dis}}
+                                <span *ngIf="zone?.tunerName" class="color-primary p-l-10 ">
+                                    <span class="text-truncate"
+                                        title="{{zone.tunerName}} {{(zone?.unit)?'('+(zone.unit)+')':''}}">
+                                        {{zone.tunerName}} {{(zone?.unit)?'('+(zone.unit)+')':''}}
+                                    </span>
+                                    <ng-container *ngIf="zone?.isApplicable;else notApplicableTpl">
+                                        | <span class="gray"> Lvl {{zone?.level}}:</span>
+                                        {{(zone.val) || '-'}}
+                                        <i class="fas fa-long-arrow-alt-right"></i>
+                                        <span class="gray"> Lvl {{priorityLevel}}:</span>
+                                        {{((zone.newVal == 'N')?'-':(zone.newVal))}}
+                                        <!-- <span class="gray">| Lvl {{priorityLevel}}</span> -->
+                                    </ng-container>
+
+                                </span>
+
+                            </div>
+                            <ul class="list-none module-ul list-none">
+                                <li *ngFor="let module of zone?.children">
+                                    <div class="module-name">
+                                        <label class="text-primary text-xs">Module:&nbsp;</label>
+                                        {{module?.dis}}
+                                        <span *ngIf="module?.tunerName" class="color-primary p-l-10 ">
+                                            <span class="text-truncate"
+                                                title="{{module.tunerName}} {{(module?.unit)?'('+(module.unit)+')':''}}">
+                                                {{module.tunerName}} {{(module?.unit)?'('+(module.unit)+')':''}}
+                                            </span>
+                                            <ng-container *ngIf="module?.isApplicable;else notApplicableTpl">
+                                                | <span class="gray"> Lvl {{module?.level}}:</span>
+                                                {{(module.val) || '-'}} <i class="fas fa-long-arrow-alt-right"></i>
+                                                <span class="gray"> Lvl {{priorityLevel}}:</span>
+                                                {{((module.newVal == 'N')?'-':(module.newVal))}}
+
+                                            </ng-container>
+
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+            </li>
+        </ul>
+    </ng-template>
+    <ng-template #notApplicableTpl>
+        <span class="gray">(Tuner is not applicable)</span>
+    </ng-template>
+
+</div>
+<div mat-dialog-actions class="pull-right">
+    <ng-container *ngIf="pointers?.length;else okBtnTpl">
+        <button class="text-uppercase btn color-primary" (click)="onNoClick()">Cancel</button>
+        <span class="seperator">|</span>
+        <button class="text-uppercase btn color-primary" [mat-dialog-close]="'apply'" cdkFocusInitial>Apply</button>
+    </ng-container>
+    <ng-template #okBtnTpl>
+        <button class="text-uppercase btn color-primary" (click)="onNoClick()">Ok</button>
+    </ng-template>
+
+</div>

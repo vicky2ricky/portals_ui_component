@@ -1,0 +1,36 @@
+<div class="addPopup">
+    <div [innerHTML] =displayMessage ></div>
+    <h4>{{isAlert?"Mute Alerts For":"Mute Notification For"}}</h4>
+    <label>
+        <input type="radio" name="dateRagePicker" (change)="handleChange($event)" value="today">
+        <span>End of the Day</span>
+    </label>
+    <label>
+        <input type="radio" name="dateRagePicker" (change)="handleChange($event)" value="tomorrow">
+        <span>1 Day</span>
+    </label>
+    <label>
+        <input type="radio" name="dateRagePicker" (change)="handleChange($event)" value="twoday">
+        <span>2 Day</span>
+    </label>
+    <label>
+        <input type="radio" name="dateRagePicker" (change)="handleChange($event)" value="week">
+        <span>End of the Week</span>
+    </label>
+    <label>
+        <input type="radio" name="dateRagePicker" (change)="handleChange($event)" value="custom">
+        <span>Custom Date</span>
+       
+    </label>
+    <label *ngIf= "canEdit">
+        <hr/>
+        <input type="radio" (change)="handleChange($event)" value="unmute">
+        <span>Unmute</span>
+    </label>
+</div>
+<input name="daterange" ngxDaterangepickerMd 
+[keepCalendarOpeningWithRange]="true"
+[linkedCalendars]="true" [timePicker] = "true" [showCancel]="true"
+[locale]="calendarLocale" [minDate]="minDate"
+drops="down" (change)="dateSelection($event)" style="display:none;"/>
+

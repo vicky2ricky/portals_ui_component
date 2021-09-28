@@ -1,0 +1,46 @@
+select {
+  width: 250px;
+}
+.mat-select {
+  width: 200px;
+  border-bottom: 1px solid rgba(235, 236, 237, 1);
+}
+::ng-deep .mat-select-arrow {
+  box-sizing: border-box;
+  height: 6px !important;
+  width: 6px !important;
+  border-left: none !important;
+  border-right: 2px solid var(--primary) !important;
+  border-top: none !important;
+  border-style: solid;
+  border-color: var(--primary);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.mat-option {
+  font-size: 13px !important;
+}
+.mat-select-panel {
+  position: absolute;
+  top: 24px;
+  left: 12px;
+  font-size: 13px;
+  font-weight: 400;
+  border-radius: 3px !important;
+  border-top-style: none;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+  border-radius: 0px !important;
+  border-right-style: none !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-radius: 0px !important;
+  border-left-style: none !important;
+}
+
+.mat-select-panel ng-animating {
+  visibility: hidden;
+}

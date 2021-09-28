@@ -1,0 +1,63 @@
+<div class="content savingsScorecard" [ngStyle]="{'width.px': chartWidth, 'height.px': chartHeight}">
+  <div class="firstRow">
+    <div class="graphics">
+      <div class="benchmark" *ngIf="chartData?.data?.benchmark || chartData?.data?.benchmark === 0" [ngStyle]="{
+        'width.px': barWidth,
+        'height.px': benchmarkHeight,
+        'background-color': colorSet?.benchmark}">
+      </div>
+      <div class="actual" *ngIf="chartData?.data?.actual || chartData?.data?.actual === 0" [ngStyle]="{
+          'width.px': barWidth,
+          'height.px': actualHeight,
+          'background-color': colorSet?.actual}">
+      </div>
+    </div>
+
+    <div class="text">
+      <label class="text-light text-uppercase"
+        [ngStyle]="{'font-size.px': applicableFontSize * .8, 'line-height.px': (applicableFontSize * .8) * 2}"> {{chartData?.mappings?.benchmark}} </label>
+      <div class="value" *ngIf="chartData?.data?.benchmark || chartData?.data?.benchmark === 0" [ngStyle]="{'font-size.px': applicableFontSize}">
+        {{chartData?.data?.benchmark | number: '1.2-2'}}
+        <span class="text-light small">
+          {{(chartData?.data?.benchmark) ? (chartData?.unit):''}}
+        </span>
+      </div>
+      <div class="value" *ngIf="!chartData?.data?.benchmark && chartData?.data?.benchmark !== 0">
+        'N.A'
+      </div>
+    </div>
+
+    <div class="text">
+      <label class="text-light text-uppercase"
+        [ngStyle]="{'font-size.px': applicableFontSize * .8, 'line-height.px': (applicableFontSize * .8) * 2}"> {{chartData?.mappings?.actual}} </label>
+      <div class="value" *ngIf="chartData?.data?.actual || chartData?.data?.actual === 0" [ngStyle]="{'font-size.px': applicableFontSize}">
+        {{chartData?.data?.actual | number: '1.2-2'}}
+        <span class="text-light small">
+          {{(chartData?.data?.actual) ? (chartData?.unit):''}}
+        </span>
+      </div>
+      <div class="value" *ngIf="!chartData?.data?.actual && chartData?.data?.actual !== 0">
+        'N.A'
+      </div>
+    </div>
+  </div>
+
+  <div class="secondRow">
+    <div class="icon">
+      <puc-dollar-icon [size]="30" [color]="colorSet?.savings"></puc-dollar-icon>
+    </div>
+    <div class="text">
+      <label class="text-light text-uppercase"
+        [ngStyle]="{'font-size.px': applicableFontSize * .8, 'line-height.px': (applicableFontSize * .8) * 2}">{{chartData?.mappings?.savings}}</label>
+      <div class="value" *ngIf = "chartData?.data?.savings || chartData?.data?.savings === 0" [ngStyle]="{'font-size.px': applicableFontSize}">
+        {{chartData?.data?.savings | number: '1.2-2'}}
+        <span class="text-light small">{{chartData?.unit}}</span> &nbsp;&nbsp; | &nbsp;&nbsp;
+        {{chartData?.data?.savingsInCurrency | currency: chartData?.currencyUnit}}
+      </div>
+      <div class="value" *ngIf = "!chartData?.data?.savings && chartData?.data?.savings !== 0">
+          'N.A'
+      </div>
+    </div>
+  </div>
+
+</div>

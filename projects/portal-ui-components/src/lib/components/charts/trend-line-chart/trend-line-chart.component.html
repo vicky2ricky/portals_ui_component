@@ -1,0 +1,20 @@
+<div class="content" id="trend-chart">
+    <ng-container *ngFor="let chart of charts">
+        <div class="graph d-flex flex-column">
+            <ng-container *ngIf="hasAccordian;else elsAccodian">
+                <puc-accordion [blockTitle]="chart?.chartName" isOpen="true"
+                [titleStyle]="accordionHeaderStyle.secondLevel" >
+                <div class="graph-content" id={{chart?.chartId}}>
+
+                </div>
+                </puc-accordion>
+            </ng-container>
+            <ng-template #elsAccodian>
+                <div class="graph-head">
+                  <h3>{{chart?.chartName}}</h3>
+                </div>
+                <div class="graph-content" id={{chart?.chartId}}></div>
+            </ng-template>
+        </div>
+    </ng-container>
+</div>

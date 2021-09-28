@@ -1,0 +1,6 @@
+<label class="checkbox-label">
+    <input type="checkbox" #inputEl [value]="value" (change)="onChange($event)" [checked]="checked"
+        [disabled]="disabled">
+    <span class="checkbox-custom rectangular {{type}}"
+        [attr.style]="hasFill && transform('--fillPercentage:' + fill+'%')" [ngClass]="{'covered':(hasFill)}"></span>
+</label>

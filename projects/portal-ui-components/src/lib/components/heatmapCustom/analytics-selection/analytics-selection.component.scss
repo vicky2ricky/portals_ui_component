@@ -1,0 +1,109 @@
+$faded-bg: var(--hover-grey);
+.widget-configuration {
+  // overflow-y: auto;
+  // overflow-x: hidden;
+  height: 95%;
+  padding-right: 15px;
+  .widget-config-form {
+      font-size: 0.9rem;
+  }
+
+  .labelDiv {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .lbl {
+      color: var(--light-grey);
+      font-weight: 700;
+      font-size: 11px;
+  }
+}
+
+
+.btn-group {
+  .btn {
+    width: 50%;
+    min-width: 84px !important;
+
+    border: 1px solid var(--line);
+    border-radius: 0px;
+    &.btn-outline-primary {
+        color: var(--primary);
+        border-color: var(--primary) !important;
+    }
+  }
+  .btn + .btn {
+      border: 1px solid var(--line);
+      margin-left: 0px;
+      border-radius: 0px;
+  }
+  .btn + .btn:not(.btn-outline-primary) {
+      border-left: 0px;
+  }
+}
+
+
+
+::ng-deep {
+  mat-form-field.select-form-field{
+      .mat-select-value{
+          overflow: inherit !important;
+      }
+  }
+  .widget-config-form{
+      .faded{
+          pointer-events: none;
+          mat-form-field.select-form-field .mat-form-field-infix ,
+          .node.selected
+          {
+                 background: #{$faded-bg}  !important;
+
+          }
+          .ng-value-container .ng-value{
+              color: var(--white) !important;
+          }
+          .radiobtn{
+              border-color: #797979  !important;
+          }
+          .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value,
+          .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background,
+          input[type="radio"]:checked ~ .radiobtn:after,
+          .mat-checkbox-checked.mat-primary .mat-checkbox-background
+          {
+              background: #797979 !important;
+          }
+          .ng-clear-wrapper,.ng-arrow-wrapper,.mat-select-arrow-wrapper,.ng-value-icon{
+              display: none !important;
+          }
+          .btn-group button.btn.btn-outline-primary{
+              color: #797979  !important;
+              border-color: #797979  !important;
+          }
+      }
+  }
+
+  mat-form-field.select-form-field {
+      .mat-form-field-infix {
+          border-top: 5px solid transparent;
+      }
+  }
+  puc-color-picker{
+      display: block;
+      margin-right: 10px;
+  }
+  puc-chart-picker,puc-color-picker {
+      .swatch-container {
+          margin-left: -40px;
+      }
+  }
+  puc-gradient-swatch{
+      .content{
+          min-height: auto;
+      }
+      .swatch-container{
+          right: 0;
+      }
+  }
+}

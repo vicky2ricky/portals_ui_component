@@ -1,0 +1,31 @@
+<div id="sunburst">
+  <div class="content" style="margin-top: 12px;">
+    <svg>
+    </svg>
+  </div>
+  <div class="listArea" [ngStyle]="{'margin-top.px' : margin.top, 'margin-left': '24px'}">
+    <h2>Dynamic Energy Distribution</h2>
+    <mat-radio-group aria-label="Select a path"
+      [(ngModel)]="selectedPath" (change) = "changeSelectedPath($event)">
+      <mat-radio-button value="floor" color="primary" class="m-r-64">Floor Level</mat-radio-button>
+      <mat-radio-button value="ccu" color="primary">Equip level</mat-radio-button>
+    </mat-radio-group>
+    <div class="parent">
+      <label>{{selection?.parent.name}}</label>
+      <span class="value">{{selection?.parent.value}} {{chartData?.unit}}</span>
+    </div>
+    <ul class="childList">
+      <li *ngFor="let child of selection?.children">
+        <div>
+          <span class="colorBox" [ngStyle]="{'background-color' : selection?.childColor}"></span>
+          <label>{{child.name}}</label>
+        </div>
+        <span class="value">{{child.value}} {{chartData?.unit}}</span>
+      </li>
+      <li *ngIf="selection?.hasOthers" class="others">
+        <label>{{selection?.others.name}}</label>
+        <span class="value">{{selection?.others.value}} {{chartData?.unit}}</span>
+      </li>
+    </ul>
+  </div>
+</div>

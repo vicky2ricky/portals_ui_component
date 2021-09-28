@@ -1,0 +1,41 @@
+<div *ngIf="message"
+    [ngClass]="{ 'alert': message, 'alert--success': (message?.type) === 'success', 'alert--danger': (message?.type) === 'error' }">
+    <ng-container>
+        <ng-container *ngIf="message.type == 'success'">
+            <i class="fas fa-check alert__green"> </i>
+            <span class="message__title alert__green">Success</span>
+            <i class="fa fa-exclamation alert__green__exc alert__green"></i>
+        </ng-container>
+        <ng-container *ngIf="message.type == 'warning'">
+            <i class="fas fa-exclamation alert__red"> </i>
+            <span class="message__title alert__red">Warning</span>
+            <!-- <i class="fas fa-exclamation alert__red__exc"></i> -->
+        </ng-container>
+        <ng-container *ngIf="message.type == 'error'">
+            <i class="fas fa-exclamation-triangle alert__red"></i>
+            <span class="message__title alert__red">Error</span>
+            <i class="fa fa-exclamation alert__red__exc alert__red"></i>
+        </ng-container>
+        <span class="message__text" [innerHTML]="message.text"></span>
+    </ng-container>
+    <svg class="close-error" (click)="closeErrorDialog()" xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 12.71 12.71" *ngIf="message.type != 'success'">
+        <defs>
+            <style>
+                .cls-1 {
+                    fill: none;
+                    stroke: #fff;
+                    stroke-miterlimit: 10;
+                }
+            </style>
+        </defs>
+        <title>Asset 1</title>
+        <g id="Layer_2" data-name="Layer 2">
+            <g id="Layer_1-2" data-name="Layer 1">
+                <line class="cls-1" x1="0.35" y1="0.35" x2="12.35" y2="12.35" />
+                <line class="cls-1" x1="12.35" y1="0.35" x2="0.35" y2="12.35" />
+            </g>
+        </g>
+    </svg>
+</div>
+<div id="overlay" *ngIf="(message?.type) == 'error' || (message?.type) == 'warning'"></div>

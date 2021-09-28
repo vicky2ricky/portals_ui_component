@@ -1,0 +1,13 @@
+<div class="d-flex align-items-center">
+    <span class="selected-color-box d-flex" (click)="toggleChartPicker($event)">
+        <img [src]="sanitizeImageUrl(selectedChartInfo?.imgSrc)" width="30" />
+    </span>
+</div>
+<div class="swatch-container mw-120 m-t-6" *ngIf="showChartContainer">
+    <ul class="list-none d-flex row text-center flex-wrap  custom-chart-icon-container">
+        <li class="chart-icon m-5" *ngFor="let chart of chartOptions"
+            [ngClass]="{'active':(chart.type == selectedChart)}" (click)="onSelectChart(chart)">
+            <img [src]="sanitizeImageUrl(chart?.imgSrc)" width="30" />
+        </li>
+    </ul>
+</div>

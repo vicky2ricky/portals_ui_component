@@ -1,0 +1,17 @@
+<h1 mat-dialog-title class="alert-details-popup__title">
+    <span *ngIf="data.fixed"><i class="fa fa-check" style="color: green;" ></i></span>
+    <span *ngIf="data.type == 2"><i  style="color:#e24301" class="fas fa-exclamation-triangle"></i></span>
+    <span *ngIf="data.type == 1"><i
+            class="fas fa-exclamation-circle fa-exclamation-circle__yellow" style="color:#fbb03b"></i></span>
+    <span *ngIf="data.type == 0"><img src="./assets/images/low_alert_icon.svg" style="height:20px;width:20px;"
+            class="alert_low"></span>
+    {{data.title}}   
+</h1>
+<mat-dialog-content class="alert-details-popup__message">
+    <div [innerHtml]="htmlContent"></div>
+</mat-dialog-content>
+<br />
+<mat-dialog-actions align="end">
+    <button class="alert-details-popup__ok-button" mat-button [mat-dialog-close]="true">OK</button>
+    <button *ngIf="data.cancelrequired" mat-button [mat-dialog-close]="false">Cancel</button>
+</mat-dialog-actions>

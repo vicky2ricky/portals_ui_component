@@ -1,0 +1,41 @@
+<div #slider class="slider">
+    <div class="slider__labels">
+        <div class='slider__labels__flexalign'>
+            <div *ngIf="sliderDisplay" id='currenttemplabel'
+                class='slider__labels__currenttemplabelclass slider__labels__active'>{{currenttempvalue}}</div>
+            <div *ngIf="!sliderDisplay" id='noDataIcon'><img class="slider__labels__noDataactive"
+                    src="../../../../assets/images/noDataSliderIcon.svg"></div>
+            <div class='slider__labels__flexalign__flexrightalign' *ngIf="!checkForTemperature">
+                <div *ngIf="sliderDisplay" id='coolingdesiredtemplabel'
+                    class='slider__labels__coolingdesiredtemplabelclass slider__labels__coolingdesiredtemplabelinactiveclass'>
+                    {{coolingdesiredtempvalue}}</div>
+                <div *ngIf="sliderDisplay" id='heatingdesiredtemplabel'
+                    class='slider__labels__heatingdesiredtemplabelclass slider__labels__heatingdesiredtemplabelinactiveclass'>
+                    {{heatingdesiredtempvalue}}</div>
+                <div *ngIf="!sliderDisplay" id='noDataLabel' class='slider__labels__noDatalabelinactiveclass'>Data Not
+                    Available</div>
+            </div>
+        </div>
+        <div *ngIf="sliderDisplay" id='TempTextlabel'
+            class="slider__labels__temptextlabel slider__labels__desiredtemplabelclass">CURRENT TEMPERATURE</div>
+    </div>
+
+
+    <div class="slider__component">
+        <div id="heatingRange"></div>
+        <div id="coolingRange"></div>
+        <div id="deadbandRange"></div>
+        <div id="rangePointContainer">
+        </div>
+        <div id="markPointContainer">
+        </div>
+        <div id="heatingdesiredtempbutton" (dragstart)="sliderDisplay"
+            (mousedown)="sliderDisplay && MouseDown($event)"
+            class="slider__component__button slider__component__heatingdesiredtempbutton"></div>
+        <div id="currenttempbutton" class="slider__component__button slider__component__currenttempbutton"></div>
+        <div id="coolingdesiredtempbutton" (dragstart)="sliderDisplay"
+            (mousedown)="sliderDisplay && MouseDown($event)"
+            class="slider__component__button slider__component__coolingdesiredtempbutton"></div>
+
+    </div>
+</div>

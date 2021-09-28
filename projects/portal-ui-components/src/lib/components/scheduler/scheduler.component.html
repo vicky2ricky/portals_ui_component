@@ -1,0 +1,57 @@
+<div #scheduler class="fs-scheduler-wrapper">
+    <div class="fs-scheduler-wrapper__header">
+        <h3 class="btn-add-entry" (click)="addScheduleClick()">
+            ADD ENTRY
+        </h3>
+    </div>
+    <div class="fs-scheduler-wrapper__body">
+        <table class="fs-scheduler-wrapper__body__table-head">
+            <tr>
+                <td></td>
+                <td>00:00</td>
+                <td>02:00</td>
+                <td>04:00</td>
+                <td>06:00</td>
+                <td>08:00</td>
+                <td>10:00</td>
+                <td>12:00</td>
+                <td>14:00</td>
+                <td>16:00</td>
+                <td>18:00</td>
+                <td>20:00</td>
+                <td>22:00</td>
+                <td>00:00</td>
+            </tr>
+        </table>
+        <table class="fs-scheduler-wrapper__body__table-body" id="{{'sch'+refId}}">
+            <tbody>
+                <tr *ngFor="let days of week" id={{days}}>
+                    <td class="fs-scheduler-wrapper__body__table-body__label">{{days}}</td>
+                    <td *ngFor="let hour of hours" class="fs-scheduler-wrapper__body__table-body__timechart">
+                        <div *ngFor="let part of minutes"
+                            class="fs-scheduler-wrapper__body__table-body__timechart__interval">
+                        </div>
+                    </td>
+                    <td class="fs-scheduler-wrapper__body__table-body__timechart">
+                        <div class="fs-scheduler-wrapper__body__table-body__timechart__interval"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- <puc-modal *ngIf="buildingLimits && !isAngualrDialog"
+        [ngClass]="{'isScheduleModalShow':scheduleState,'isScheduleModalHide':!scheduleState}"
+        (closeModal)="closeModal()" [ngStyle]="{}">
+        <puc-modal-header>
+        </puc-modal-header>
+        <div class="fs-scheduler-wrapper__modal">
+            <puc-scheduler-modal *ngIf="scheduleState" [sliderDisplayFlag]='sliderDisplayFlag'
+                [buildingLimits]="buildingLimits" [sliderInput]="sliderInput" [zoneName]="zoneName"
+                [defaultLimits]="defaultLimits" [scheduleType]="scheduleTypeVal" [siteId]="siteId"
+                [type]="scheduleState" [scheduleInfo]="scheduleInfo" (scheduleChanges)="scheduleChanged($event)"
+                [editScheduleData]="editScheduleData" [buildingScheduleInfo]="buildingScheduleInfo"
+                [allZoneSchData]="allZoneSchData" [refId]="refId" id="sch-modal"></puc-scheduler-modal>
+        </div>
+    </puc-modal> -->
+
+</div>

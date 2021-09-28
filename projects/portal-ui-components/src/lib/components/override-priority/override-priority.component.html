@@ -1,0 +1,162 @@
+<div class="d-flex flex-column priority-section">
+    <div class="flex-head">
+        <div class="row">
+
+            <div class="col-11 d-flex align-items-center"
+                [ngClass]="{'flex-column m-t-10 m-b-10':(priorityDetails?.onlyForSystemTuner)}">
+                <div class="d-flex flex-column">
+                    <h4 class="d-flex m-t-0 m-b-0">Override
+                        Priority: {{priorityDetails?.tunerGroup}}
+                    </h4>
+                    <div class="priority-name">{{priorityDetails?.name}}</div>
+                </div>
+
+
+                <div class=" d-flex"
+                    [ngClass]="{'justify-content-start':(priorityDetails?.onlyForSystemTuner),'justify-content-end':!(priorityDetails?.onlyForSystemTuner)}"
+                    *ngIf="priorityDetails?.defaultVal || priorityDetails?.defaultVal ==0">Default: &nbsp; <b>{{priorityDetails?.defaultVal}}</b>
+                </div>
+            </div>
+            <div class="col-1  d-flex justify-content-end align-items-center">
+
+                <i class="fas fa-times" (click)="close()"></i>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="flex-body p-0-20">
+        <div class="priority-container row">
+            <div class=" p-r-0 priority-info " [ngClass]="{'col-md-1 col-xs-2': !(priorityDetails?.onlyForSystemTuner),
+                    'col-md-4 col-xs-6': (priorityDetails?.onlyForSystemTuner)}">
+                <h5 class=" priority-head">Priority No
+                    <br />
+                    <div><small class="text-hide">ccuname</small><br /></div>
+                    <div><small class="text-hide">zoneName</small><br /></div>
+                    <div class="module-text"><small class="text-hide ">moduleName</small></div>
+                </h5>
+
+                <ul class="list-none">
+                    <li class="priority-val" *ngFor="let priority of priorityArray;let i =index;"
+                        [ngClass]="{'hasVal':(selPriorityVal),'p-t-1 p-b-1':(priorityLevel == priority)}">
+                        {{priority}}
+                        <span>
+                            <select class="sel-priority" [(ngModel)]="selPriorityVal"
+                                *ngIf=" (priorityLevel == priority)">
+                                <ng-container *ngFor="let option of options">
+                                    <option value="{{option}}">{{option}}</option>
+                                </ng-container>
+                                <!-- <option value="N">Clear Value</option> -->
+                            </select>
+                            <i class="fas fa-redo-alt fa-xs color-primary" [ngClass]="{'disabled':(isResetDisabled)}"
+                                *ngIf="(priorityLevel == priority)" matTooltip="Clear the value"
+                                (click)="!isResetDisabled && selPriorityVal = 'N'"></i>
+                        </span>
+
+
+                    </li>
+                </ul>
+            </div>
+            <div class="priority-child-container " [ngClass]="{'col-md-11 col-xs-10': !(priorityDetails?.onlyForSystemTuner),
+                    'col-md-6 col-xs-6': (priorityDetails?.onlyForSystemTuner)}">
+                <div class="row">
+                    <div class="tuner-child-categories">
+                        <h5 class="color-primary priority-head ">
+                            <span class="text-hide">
+                                sitename
+                            </span><br />
+                            <div><small class="text-hide">ccuname</small><br /></div>
+                            <div><small class="text-hide">zoneName</small><br /></div>
+                            <div class="module-text"><small class="text-hide ">moduleName</small></div>
+                        </h5>
+
+                        <ul class="list-none ">
+                            <li class="priority-val d-flex" *ngFor="let priority of priorityArray;let i =index;">
+                                <span class="text-hide">{{priority}}</span>
+                                <ng-container *ngIf="priority == 17 ">
+                                    <h5 class="disabled" class="priority-head mock-btn w-100 p-l-10">
+                                        Default </h5>
+                                </ng-container>
+                                <ng-container *ngIf="priority == 16 ">
+                                    <h5 [ngClass]="{'color-primary':(type == 'building')}"
+                                        class="priority-head mock-btn w-100 p-l-10">
+                                        Building <b *ngIf="priorityLevel  == 16 && tunerChildValues.length"
+                                            class="pull-right m-r-5">></b></h5>
+                                </ng-container>
+                                <ng-container *ngIf="priority == 14 ">
+                                    <h5 [ngClass]="{'color-primary':(type == 'system')}"
+                                        class="priority-head mock-btn w-100 p-l-10">
+                                        System <b *ngIf="priorityLevel == 14 && tunerChildValues.length"
+                                            class="pull-right m-r-5">></b></h5>
+                                </ng-container>
+                                <ng-container *ngIf="priority == 10 ">
+                                    <h5 [ngClass]="{'color-primary':(type == 'zone')}"
+                                        class="priority-head mock-btn w-100 p-l-10">
+                                        Zone <b *ngIf="priorityLevel == 10 && tunerChildValues.length"
+                                            class="pull-right m-r-5">></b></h5>
+                                </ng-container>
+                                <ng-container *ngIf="priority == 8">
+                                    <h5 [ngClass]="{'color-primary':(type == 'module')}"
+                                        class="priority-head mock-btn w-100 p-l-10">
+                                        Module <b *ngIf="priorityLevel == 8 && tunerChildValues.length"
+                                            class="pull-right m-r-5">></b></h5>
+                                </ng-container>
+                            </li>
+                        </ul>
+
+
+                    </div>
+
+                    <div class="prirotity-values">
+                        <div class="parent">
+                            <div class="child" *ngFor="let point of tunerChildValues">
+                                <h5 class=" priority-head p-l-10 p-r-10">
+                                    <span class="text-primary"
+                                        title="{{point?.siteName}}">{{point?.siteName}}<br /></span>
+                                    <div class="text-secondary text-truncate" title="{{point?.ccuName}}">
+                                        <small>{{point?.ccuName}}</small>
+                                    </div>
+                                    <div class="text-secondary text-truncate" title="{{point?.zoneName}}">
+                                        <small>{{point?.zoneName}}</small><br />
+                                    </div>
+                                    <div class="text-secondary module-text text-truncate" title="{{point?.moduleName}}">
+                                        <small>{{point?.moduleName}}</small>
+                                        <br *ngIf="!point?.moduleName" />
+                                    </div>
+                                    <!-- {{point?.name}} -->
+                                </h5>
+                                <ul class="list-none ">
+                                    <li class="priority-val d-flex"
+                                        *ngFor="let priority of point['pointArray'];let i =index;">
+                                        <ng-container *ngIf="priority && priority.hasOwnProperty('val')">{{priority.val}}</ng-container>
+                                        <span class="text-hide">{{priority.level}}</span>
+                                        <span class="selected-val p-l-5 pl-r-5 color-primary"
+                                            *ngIf="(priorityLevel == priority.level)">
+                                            <i class="fas fa-long-arrow-alt-right"
+                                                *ngIf="(selPriorityVal || selPriorityVal==0) && (priority && priority.hasOwnProperty('val'))"></i>
+                                            {{(selPriorityVal == 'N')?'-':(selPriorityVal)}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex-footer d-flex justify-content-end align-items-center">
+        <button class="text-uppercase btn color-primary" (click)="onNoClick()">Cancel</button>
+        <span class="seperator">|</span>
+        <button class="text-uppercase btn color-primary" [disabled]="!selPriorityVal"
+            (click)="selPriorityVal && save(priorityDetails)" cdkFocusInitial>Save</button>
+    </div>
+
+</div>
+<!-- <div class="priority-details__buttongroup">
+    <button id="cancel_priority_changes" class="priority-details__buttongroup__cancel"
+        (click)="close()">CANCEL</button><br>
+    <button id="save_priority_changes" class="priority-details__buttongroup__save" (click)="close()">SAVE</button><br>
+</div> -->

@@ -1,0 +1,57 @@
+<mat-form-field  [floatLabel]="'never'">
+    <mat-select #selectDropdown [(value)] = "selectedValue" [placeholder]="placeholderLabel" [multiple]="multiSelect" [disabled]="disabled" [disableOptionCentering]="true">
+      <mat-select-trigger *ngIf="multiSelect">
+        {{selectedValues.length ? (displayKey?(selectedValues[0][displayKey]):selectedValues[0]) : ''}}
+        <span *ngIf="selectedValues?.length > 1" class="example-additional-selection">
+          (+{{selectedValues.length - 1}} more)
+        </span>
+      </mat-select-trigger>
+      <!-- search added -->
+      
+      <div [class.hide]="!search" class="mat-select-search-inner"
+          [ngClass]="{'mat-select-search-inner-multiple': matSelect.multiple}">
+        <input matInput
+              class="mat-select-search-input"
+              #searchSelectInput
+              (keydown)="_handleKeydown($event)"
+              [(ngModel)]="searchText"
+              (ngModelChange)="inputChanged($event)"
+              [placeholder]="'Search'"
+              autocomplete="off"
+        />
+
+        <button mat-button *ngIf="searchText"
+            mat-icon-button
+            aria-label="Clear"
+            (click)="_reset(true)"
+            class="mat-select-search-clear">
+            <i class="fas fa-times appIcon"></i>
+            
+        </button>
+      </div>
+      <div *ngIf="noEntriesFoundLabel && filteredList.length === 0"
+          class="mat-select-search-no-entries-found">
+        {{noEntriesFoundLabel}}
+      </div>
+      <div *ngIf="searchingLabel && isSearching"
+          class="mat-select-search-no-entries-found">
+        {{searchingLabel}}
+      </div>
+      <!-- search end -->
+      <!-- <mat-select-search [(ngModel)]="searchText" (ngModelChange)="inputChanged($event)"></mat-select-search> -->
+      <div class="selectionOptions" *ngIf="!isSearching">
+        <mat-option *ngFor="let item of filteredList" [value]="valueKey?item[valueKey]:item"  [disabled]="_checkPrimary&&primaryKey?item[primaryKey]:false" (click)="toggleSelection(item)">
+          {{displayKey?item[displayKey]:item}}
+        </mat-option>
+      </div>
+      <div class="divider" *ngIf="selectedValues.length"></div>
+      <div class="selectedOptionsList">
+        <ng-container *ngFor="let item of selectedValues">
+          <mat-option *ngIf="checkSelection(item)" [value]="valueKey?item[valueKey]:item" (click)="toggleSelection(item)">
+            {{displayKey?item[displayKey]:item}}</mat-option>
+        </ng-container>
+      </div>
+    </mat-select>
+    <span *ngIf="isRequired" class="required-field" matPrefix>*</span>
+
+  </mat-form-field>

@@ -1,0 +1,25 @@
+.widget-card .widgetLoader {
+  flex-grow: unset;
+  margin-top: 24px;
+}
+
+.trendLine {
+  padding: 0 0 16px 0 !important;
+  box-shadow: none;
+}
+
+
+.warningDiv {
+  margin-top: 12px !important;
+  padding: 24px;
+  background-color: #fcfcfc;
+  font-size: 14px;
+
+  opacity: 0.8;
+  color: #444;
+
+  .warningIcon {
+    color: var(--primary);
+    opacity: 0.6;
+  }
+}

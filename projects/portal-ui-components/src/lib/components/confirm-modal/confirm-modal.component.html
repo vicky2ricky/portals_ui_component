@@ -1,0 +1,35 @@
+<h1 mat-dialog-title class="text-capitalize sg-modal-title m-b-10" *ngIf="title">{{title}}</h1>
+<div mat-dialog-content>
+
+    <div class="row align-items-center">
+        <div class="col-2 text-center" *ngIf="showConfirmIcon">
+            <i class="fa fa-exclamation-triangle color-primary fa-lg"></i>
+        </div>
+        <div class="p-l-0 pre-wrap" [ngClass]="{'col-12':(!showConfirmIcon),'col-10':(showConfirmIcon)}">
+            <div [innerHtml]="htmlContent"></div> 
+            <div class="color-primary" *ngIf="showTimer">. . . {{countDispaly}} sec</div>
+        </div>
+    </div>
+
+</div>
+<div mat-dialog-actions class="pull-right">
+    <ng-container *ngIf="type == 'confirm'">
+        <button class="text-uppercase btn color-primary" (click)="onNoClick()">Cancel</button>
+        <span class="seperator">|</span>
+        <button class="text-uppercase btn btn-text color-primary" [mat-dialog-close]="'confirm'"
+            cdkFocusInitial [disabled]="showTimer">{{confirmBtnText}}</button>
+    </ng-container>
+    <ng-container *ngIf="type == 'formPendingConfirm'">
+        <button class="text-uppercase btn btn-text color-primary" (click)="onNoClick()">Cancel</button>
+        <span class="seperator">|</span>
+        <button class="text-uppercase btn btn-text color-primary"
+            [mat-dialog-close]="'discard'">{{discardText}}</button>
+        <span class="seperator">|</span>
+        <button class="text-uppercase btn btn-text color-primary" [mat-dialog-close]="'save'"
+            cdkFocusInitial>{{saveText}}</button>
+    </ng-container>
+    <ng-container *ngIf="type == 'dialog'">
+        <button class="text-uppercase btn color-primary" (click)="onNoClick()">Ok</button>
+    </ng-container>
+
+</div>

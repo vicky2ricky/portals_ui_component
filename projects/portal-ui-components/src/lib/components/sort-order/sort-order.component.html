@@ -1,0 +1,49 @@
+<!-- <div mat-dialog-title>
+  <div  class="title">Reorder {{title}}</h1>
+  <div class="info-txt">Drag and drop to reorder</div>
+</div>
+
+<div mat-dialog-content >
+
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let item of list" cdkDrag>{{key?item[key]:item}}</div>
+  </div>
+</div>
+<div mat-dialog-actions class="pull-right">
+    <button class="text-uppercase btn color-primary" (click)="onNoClick()">Cancel</button>
+    <span class="seperator">|</span>
+    <button class="text-uppercase btn color-primary" (click)="onConfirm()" cdkFocusInitial>Save</button>
+</div> -->
+
+<div class="cntr">
+
+  <div class="row">
+        <div>
+          <div  class="title">Reorder {{title}}</div>
+          <div class="info-txt">{{subTitle}}</div>
+        </div>
+    </div>
+
+    <div class="row list" cdkDropList (cdkDropListDropped)="drop($event)">
+     
+        <div class="item" *ngFor="let item of list" cdkDragBoundary=".list" cdkDragLockAxis="y" cdkDrag>
+          <div class="display-txt"><i class="color-primary fas fa-grip-vertical"></i> {{key?item[key]:item}}</div>
+          <div *ngIf="showDelete">
+            <i class="color-primary fas fa-trash delete-icon" *ngIf="deleteIconKey?!item[deleteIconKey]:true" (click)="deleteItem(item)"></i>
+            <i class="fas fa-trash disabled" 
+            *ngIf="deleteIconKey?item[deleteIconKey]:false"
+            [matTooltipClass]="'item-tooltip'"
+              matTooltip="Can not be delete floor with zone(s)"
+              matTooltipPosition="below"></i>
+            
+          </div>
+        </div>
+    </div>
+
+    <div mat-dialog-actions class="btns-ctnr">
+        <button class="btn color-primary text-uppercase btn-outline-primary" (click)="onNoClick()">Cancel</button>
+        <button class="btn color-primary text-uppercase btn-outline-primary" [mat-dialog-close]="list"
+            cdkFocusInitial>Save</button>
+    </div>
+      
+</div>

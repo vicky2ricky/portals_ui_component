@@ -1,0 +1,25 @@
+.fa-exclamation-triangle {
+    height: 25px;
+    line-height: 1em;
+}
+
+.seperator {
+    transform: scale(1.1);
+    margin-top: -5px;
+    color: var(--hover-grey);
+}
+.sg-modal-title {
+    font-weight: 500;
+}
+.pre-wrap {
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+button {
+    &:disabled {
+        border:none !important;
+        opacity: 0.5;
+        color: var(--gray) !important;
+    }
+}

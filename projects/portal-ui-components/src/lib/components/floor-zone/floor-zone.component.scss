@@ -1,0 +1,45 @@
+.resize {
+    width: 11.76%;
+    height: 20%;
+    background: rgba(254, 249, 247, 1);
+    text-align: center;
+    font-size: 0.8rem;
+    position: absolute;
+    //border: 1px solid red;
+    box-sizing: border-box;
+}
+
+.dropzone {
+    background: lightgray;
+    border: 1px solid black;
+    box-sizing: content-box;
+}
+
+.dropzone .box {
+    position: absolute;
+}
+
+.box.dragging {
+    background: coral;
+}
+
+.floor-plan-img {
+    // position: relative;
+    // transform: translateX(-50%);
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    // top: 50%;
+    // max-width: 100%;
+    // max-height: 100%;
+}
+.zone-name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 85%;
+}
+.close-btn {
+    position: absolute;
+    top: 0;
+    right: 2px;
+}

@@ -1,0 +1,202 @@
+.priority-section * {
+    box-sizing: border-box;
+}
+.flex-head {
+    background: #ddd;
+    > .row {
+        min-height: 50px;
+    }
+}
+.p-0-20 {
+    padding: 0px 20px;
+}
+.p-r-0 {
+    padding-right: 0px;
+}
+.priority-info {
+    border-right: 1px solid var(--line);
+    min-width: 140px;
+}
+.priority-child-container {
+    max-width: calc(100% - 140px);
+}
+.priority-head {
+    margin: 0;
+    padding: 5px 0px;
+    border-bottom: 1px solid var(--line);
+}
+.fas {
+    &:hover {
+        cursor: pointer;
+    }
+}
+.priority-val {
+    //   &:not(.hasVal) {
+    //     input,
+    //     i {
+    //       display: none;
+    //     }
+    //   }
+
+    &.hovered {
+        input,
+        i {
+            display: initial;
+        }
+    }
+}
+.p-r-5 {
+    padding-right: 5px;
+}
+.tuner-child-categories {
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.02);
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.02);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.02);
+    border-right: 1px solid var(--line);
+    // border-bottom: 1px solid var(--line);
+    width: 140px;
+}
+.priority-val {
+    padding: 2px 10px;
+    color: rgba(51, 51, 51, 0.6);
+}
+
+div.parent::-webkit-scrollbar {
+    width: 7px;
+    height: 0;
+    transition: height 0.15s ease-out;
+}
+div.parent::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+div.parent::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: rgba(255, 255, 255, 0.3) 0 0 0 1px;
+}
+div.parent:hover::-webkit-scrollbar {
+    height: 0.6em;
+    opacity: 1;
+    transition: height 0.25s ease-in;
+}
+div.parent:hover::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: rgba(255, 255, 255, 0.3) 0 0 0 1px;
+}
+div.parent::-webkit-scrollbar-thumb:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.55);
+}
+@media screen and (max-width: 480px) {
+    div.parent {
+        right: 3px;
+    }
+    div.parent::-webkit-scrollbar {
+        width: 5px;
+    }
+}
+.parent {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    .child {
+        // padding: 0px 10px;
+        min-width: 140px;
+        max-width: 140px;
+        border-right: 1px solid var(--line);
+        // border-bottom: 1px solid var(--line);
+        .priority-val {
+            padding: 2px 10px;
+        }
+    }
+}
+.priority-name {
+    margin: 0px;
+    color: rgba(51, 51, 51, 0.6);
+    font-weight: bold;
+    font-size: 12px;
+}
+.mock-btn {
+    padding: 0px;
+    border-bottom: none;
+}
+.override-modal-container {
+    .mat-dialog-container {
+        padding: 0px !important;
+    }
+}
+
+.text-hide {
+    opacity: 0;
+    text-indent: -9999px;
+}
+.disabled {
+    opacity: 0.6 !important;
+    color: #333 !important;
+    pointer-events: none;
+}
+.c-w {
+    color: var(--white);
+}
+.sel-priority {
+    min-width: 75px;
+    max-width: 75px;
+    padding-left: 3px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid;
+    opacity: 0.7;
+    &:focus {
+        outline: 1px solid var(--primary);
+        border-bottom: transparent !important;
+    }
+}
+.priority {
+    min-width: 30px;
+}
+.seperator {
+    transform: scale(1.1);
+    margin-top: -5px;
+}
+.btn:disabled {
+    color: var(--light-grey);
+}
+.priority-col {
+    // padding: 0px 10px;
+    min-width: 100px;
+    height: 100%;
+    border-right: 1px solid var(--line);
+    .priority-val:nth-child(even) {
+        background-color: rgba(248, 249, 250, 0.996078);
+    }
+    .priority-val {
+        padding: 2px 10px;
+    }
+}
+
+.prirotity-values {
+    width: calc(100% - 140px);
+    .priority-val:nth-child(even) {
+        background-color: rgba(248, 249, 250, 0.996078);
+    }
+}
+.priority-val:nth-child(even) {
+    background-color: rgba(248, 249, 250, 0.996078);
+}
+.flex-footer {
+    border-top: 1px solid var(--line);
+}
+.fa-redo-alt {
+    transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+}

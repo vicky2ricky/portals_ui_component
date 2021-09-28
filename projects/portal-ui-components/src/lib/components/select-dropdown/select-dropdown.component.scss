@@ -1,0 +1,120 @@
+$mat-menu-side-padding: 5px !default;
+$scrollbar-width: 17px;
+$clear-button-width: 20px;
+$multiple-check-width: 33px;
+
+mat-form-field {
+    width: 100%;
+    .required-field {
+        color: var(--danger);
+        font-size: 18px;
+        margin-right: 2px;
+    }
+}
+
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+}
+.mat-select-search-hidden {
+    visibility: hidden;
+}
+.mat-select-search-inner {
+    // position: fixed;
+    // top: 24px;
+    width: 100%;
+    border-bottom: 1px solid var(--line);
+    background: white;
+    height: 40px;
+    margin-bottom: 8px;
+    input {
+        height: 40px;
+        font-size: 12px;
+        padding-left: 10px;
+    }
+    &.mat-select-search-inner-multiple {
+        width: calc(100% + #{2 * $mat-menu-side-padding - $scrollbar-width + $multiple-check-width});
+    }
+}
+
+.selectionOptions{
+    height: auto;
+    max-height: 230px;
+    overflow-y: auto;
+    margin-bottom: 8px;
+
+    mat-option {
+        font-size: 13px;
+    }
+}
+
+.selectedOptionsList {
+  height: auto;
+  max-height: 100px;
+  overflow-y: auto;
+  mat-option {
+    font-size: 13px;
+  }
+}
+
+::ng-deep .mat-select-search-panel {
+    /* allow absolute positioning relative to outer options container */
+    width: 240px;
+    transform: none !important;
+    min-width: 100% !important;
+    max-height: 400px !important;
+    overflow: hidden !important;
+}
+
+.mat-select-search-input {
+    //padding: $mat-menu-side-padding;
+    padding-right: $mat-menu-side-padding + $clear-button-width;
+    box-sizing: border-box;
+}
+.mat-select-search-no-entries-found {
+    padding: $mat-menu-side-padding;
+    font-size: 13px;
+}
+.mat-select-search-clear {
+    position: absolute;
+    right: 0;
+    top: 1px;
+    mat-icon {
+        font-size: 14px !important;
+    }
+}
+
+::ng-deep .mat-select-arrow {
+    box-sizing: border-box;
+    height: 6px !important;
+    width: 6px !important;
+    border-left: none !important;
+    border-right: 2px solid var(--primary) !important;
+    border-top: none !important;
+    border-style: solid;
+    border-color: var(--primary);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    color: var(--primary);
+}
+::ng-deep .cdk-overlay-pane-select-search {
+    /* correct offsetY so that the selected option is at the position of the select box when opening */
+    margin-top: -50px;
+    .mat-primary .mat-pseudo-checkbox-checked,
+    .mat-primary .mat-pseudo-checkbox-indeterminate {
+        background: var(--primary);
+    }
+}
+
+.divider {
+    background: var(--line);
+    height: 1px;
+}
+
+.appIcon {
+    font-size: .88rem;
+    color: rgba(var(--primary-rgb),0.5);
+    &:hover {
+        color: var(--primary);
+    }
+  }

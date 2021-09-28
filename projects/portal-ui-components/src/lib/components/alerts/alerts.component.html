@@ -1,0 +1,140 @@
+<div>
+    <div class="row">
+        <div class="col-xs-6 flex-ctnr">
+            <mat-form-field class="search-input" [floatLabel]="'never'">
+                <input autocomplete="off" matInput placeholder="Search" #searchTextField
+                (keyup)="search(searchTextField?.value)" trim="blur"/>
+                <i class="fas fa-search" matSuffix></i>
+            </mat-form-field>
+
+            <div class="alertspage-content__priority">
+                <div class="m-r-10">
+                    <span class="severe-count m-r-"> <i
+                            class="icon-size fas fa-exclamation-circle p-r-5"></i><span>{{severeAlertCount !== undefined?severeAlertCount:0}}</span></span>
+                    SEVERE
+                </div>
+                <div class="m-r-10">
+                    <span class="moderate-count m-r-5">
+                        <i class="icon-size fas fa-exclamation-circle p-r-5"></i><span>{{moderateAlertCount !== undefined?moderateAlertCount:0}}  </span>
+                    </span>
+                    MODERATE
+                </div>
+                <div class="m-r-10"><span class="low-count m-r-5">
+                    <i class="icon-size fas fa-exclamation-circle p-r-5"></i><span>{{lowAlertCount !==
+                        undefined?lowAlertCount: 0}}</span></span>LOW
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="d-flex flex-wrap justify-content-end">
+                
+                <div class="alertspage-content__hidealert"> <span class="hideFixedText">Hide
+                    Fixed</span>
+                    <div class="switch">
+                        <ui-switch [(ngModel)]="hideFixed" uncheckedLabel="" (valueChange)="toggleFixedData($event)"><i
+                                *ngIf="hideFixed" class="fa fa-check"></i></ui-switch>
+                    </div>
+                </div>
+                <div class="pgtion">
+                   
+                    <mat-paginator class="user-tbl-paginator" #paginator [length]="recordlength" [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions"  [pageIndex]="page" (page)="pageEvent=$event; onChangePage($event)">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+    <div class="table-container d-flex flex-column">
+        <div *ngIf="!displayNoRecord">
+            <ngx-skeleton-loader [theme]="{ 'border-radius': '0', width: '100%'}"></ngx-skeleton-loader>
+            <div id="skeleton-box">
+                <div class="skeleton-box-value"  *ngFor="let repeat of [0,1,2,3,4,5,6,7,8]">
+                    <div class="skeleton-box-width"   *ngFor="let repeat of [0,1,2,3]">
+                        <ngx-skeleton-loader></ngx-skeleton-loader>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table [class.hidden]="!(displayData.length && displayNoRecord)" mat-table [dataSource]="displayData"
+            class="other-roles-tbl" matSort (matSortChange)="sortData($event)">
+
+            <ng-container matColumnDef="Type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Severity </th>
+                <td  class="alert-type" mat-cell
+                    *matCellDef="let row">
+                    <div class="severity-icons-cntr">
+                        <span [class.hide-icon]="!row.fixed" class="m-r-5"><i class="fa fa-check"></i></span>
+                        <span *ngIf="row.type == 2"><i class="fas fa-exclamation-circle fa-exclamation-circle__severe fa-lg"></i></span>
+                        <span *ngIf="row.type == 1"><i
+                                class="fas fa-exclamation-circle fa-exclamation-circle__yellow"></i></span>
+                        <span *ngIf="row.type == 0"><i class="fas fa-exclamation-circle fa-lg fa-exclamation-circle__blue"></i></span>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Time">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+                <td mat-cell *matCellDef="let row">
+                    {{row.time}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="siteName" *ngIf="siteRefs && siteRefs.length >1">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Name </th>
+                <td  mat-cell *matCellDef="let row">
+                    {{row.siteName?row.siteName:'-'}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="EquipName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Equip Name </th>
+                <td mat-cell *matCellDef="let row">
+                    {{row.equipName?row.equipName:row.ccuName}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mAlertType" *ngIf="showAlertType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                <td  mat-cell *matCellDef="let row">
+                    {{row.mAlertType?row.mAlertType:'-'}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="MuteState" *ngIf="showMute">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Mute State </th>
+                <td mat-cell *matCellDef="let row">
+                    <div class="mute-state">
+                        <i [ngClass]="{ 'fa-volume-off': !row['disableDateTimeThru'],'fa-volume-mute': row['disableDateTimeThru']}"
+                        class="fas p-5" customToolTip [isHandlePos]="false" [showExtraOption] ="row['disableDateTimeThru']"
+                        [contentTemplate]="dateranger"> </i>
+                    </div>
+                    <ng-template #dateranger>
+                        <div class="dateRangePopup">
+                            <puc-add-edit [id]="row.equipId?row.equipId:row.ccuId" [type]="row.equipName?'equip':'ccu'"
+                                [endTime]="row['disableDateTimeThru']"
+                                (formatDate)="onDateChanged($event, row)">
+                            </puc-add-edit>
+                        </div>
+                    </ng-template>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                <td class="p-l-5 p-r-10" (click)="openAlertDetailsPopup(row)" mat-cell *matCellDef="let row">
+                    {{row.message}}
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div class="noAlerts" *ngIf="displayNoRecord && displayData.length == 0">There are no alerts to show.</div>
+       
+    </div>
+
+</div>

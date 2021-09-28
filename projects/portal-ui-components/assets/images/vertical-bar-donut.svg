@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <clipPath id="clip-line_vertical_bar">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="line_vertical_bar" clip-path="url(#clip-line_vertical_bar)">
+    <g id="noun_Graph_1012401" transform="translate(-4.298 53.59)">
+      <path id="Path_4" data-name="Path 4" d="M12.158,6.886V2.41a8.813,8.813,0,0,1,7.636,7.636H15.318a4.407,4.407,0,0,0-3.16-3.16Zm0,13a8.813,8.813,0,0,0,7.636-7.636H15.318a4.407,4.407,0,0,1-3.16,3.16Zm-2.2-13V2.41a8.813,8.813,0,0,0,0,17.474V15.409a4.407,4.407,0,0,1,0-8.523Z" transform="translate(13 -51)" fill="#ffe066"/>
+    </g>
+    <path id="Path_6" data-name="Path 6" d="M35.782,42.7H11.052V27.966a1.086,1.086,0,1,0-2.172,0V43.782a1.086,1.086,0,0,0,1.086,1.086H35.782a1.086,1.086,0,1,0,0-2.172Z" transform="translate(2.12 -0.88)" fill="#b4b4b4"/>
+    <g id="noun_Graph_1012401-2" data-name="noun_Graph_1012401" transform="translate(-4.298 53.59)">
+      <path id="Path_4-2" data-name="Path 4" d="M12.158,19.886a8.813,8.813,0,0,0,7.636-7.636H15.318a4.407,4.407,0,0,1-3.16,3.16Zm-2.2-13V2.41a8.813,8.813,0,0,0,0,17.474V15.409a4.407,4.407,0,0,1,0-8.523Z" transform="translate(13 -51)" fill="#f3646a"/>
+    </g>
+    <rect id="Rectangle_5" data-name="Rectangle 5" width="2" height="8" rx="1" transform="translate(16 32)" fill="#ffe066"/>
+    <rect id="Rectangle_8" data-name="Rectangle 8" width="2" height="7" rx="1" transform="translate(34 33)" fill="#ffe066"/>
+    <rect id="Rectangle_6" data-name="Rectangle 6" width="2" height="11" rx="1" transform="translate(22 29)" fill="#f3646a"/>
+    <rect id="Rectangle_7" data-name="Rectangle 7" width="2" height="10" rx="1" transform="translate(28 30)" fill="#fab666"/>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+.sg-delete-container {
+    .mat-dialog-container {
+        box-shadow: none;
+        border-radius: 8px;
+    }
+}
+
+.seperator {
+    transform: scale(1.1);
+    margin-top: -5px;
+}
+.fa-exclamation-triangle {
+    height: 25px;
+    line-height: 1em;
+}
+.sg-delete-title {
+    font-weight: 500;
+}

@@ -1,0 +1,46 @@
+#pie {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+}
+
+
+.textArea {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+
+  h2 {
+    margin-bottom: -2px;
+    font-weight: 400;
+  }
+
+  .breakup {
+    margin-top: 10px;
+  }
+
+  .details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    font-weight: 400;
+    font-size: 0.68rem;
+
+    max-width: 310px !important; 
+
+    .value {
+      margin: 0px 12px 0px 4px;
+    }
+  }
+
+  .colorBox {
+    width: 8px;
+    height: 8px;
+    border-radius: 1px;
+    display: inline-block;
+    margin-right: 4px;
+  }
+}

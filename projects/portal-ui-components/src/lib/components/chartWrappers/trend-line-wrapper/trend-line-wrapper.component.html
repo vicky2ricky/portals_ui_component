@@ -1,0 +1,30 @@
+<mat-card class="widget-card trendLine" id="{{widget?.widgetId}}">
+    <ng-container *ngIf="!warningInChart;else warningTpl">
+      <ng-container *ngIf="!isLoading;else loaderTpl">
+        <mat-card-content>
+          <puc-trend-line-chart [xAxis]="true" [consumptionData]=consumptionData [view]=[chartWidth,chartHeight]
+              [tooltipInfo]="chartTooltips" [hasGlobalLevelMouseEvents]="true" [hasAccordian]="false" [withinHeatmap] = "true">
+          </puc-trend-line-chart>
+        </mat-card-content>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #loaderTpl>
+      <div class="d-flex justify-content-center widgetLoader" *ngIf="isLoading">
+        <img src="./assets/images/loader.gif" width="60" />
+      </div>
+    </ng-template>
+
+    <ng-template #warningTpl>
+      <div class="h-100 warningDiv d-flex justify-content-center">
+        <i class="fas fa-exclamation-triangle warningIcon"></i>
+        <div class="m-l-12">
+          <div [innerHTML]="warningMsg">
+          </div>
+          <!-- <button mat-stroked-button color="primary" class="m-t-8" (click)="editWidgetInBuilder()" *ngIf="!isEdit && showBuilderOption">Edit in
+            Builder</button> -->
+        </div>
+      </div>
+    </ng-template>
+
+</mat-card>

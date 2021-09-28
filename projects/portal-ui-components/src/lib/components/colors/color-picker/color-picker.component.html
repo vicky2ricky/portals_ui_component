@@ -1,0 +1,19 @@
+<div class="d-flex align-items-center">
+    <span class="selected-color-box d-flex" (click)="showColorContainer = !showColorContainer"
+    [ngStyle]="{'background-color' : selectedColor}" >
+        
+    </span>
+</div>
+<div class="swatch-container mw-120 m-t-10" *ngIf="showColorContainer">
+    <ul class="list-none d-flex row text-center flex-wrap  custom-chart-icon-container">
+
+        <li class="color-icon" *ngFor="let color of availableColorSet"
+             (click)="onSelectColor(color)"
+            [ngStyle]="{'background-color' : color}"
+            
+            >
+            <i class="fa fa-check color-checked" *ngIf="color == selectedColor" aria-hidden="true"></i>
+        </li>
+
+    </ul>
+</div>

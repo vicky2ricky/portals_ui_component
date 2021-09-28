@@ -1,0 +1,240 @@
+<form novalidate class="pam-builder-form" [ngClass]="{'inlineMode': data.modalType === 'inline'}">
+  <div class="d-flex flex-column relative">
+
+      <!-- Top portion -->
+      <div class="flex-head" [ngClass]="{'faded': deleteRequestInProgress}">
+          <div class="row align-items-center">
+              <div class="col-12">
+
+                  <puc-selector-and-editor [selections]=vizSelectorOptions identifierField="id" *ngIf="globalEditMode"
+                    (selectionChanged)="onVisualizationChanged($event)"
+                    (nameChanged)="onVizNameChanged($event)"
+                    (deleteSelected)="onVizDelete()"
+                    (closeDialog)="onCloseDialog()">
+                  </puc-selector-and-editor>
+
+                  <mat-form-field class="no-input" *ngIf="data?.mode == 'create' || localEditMode">
+                    <mat-label></mat-label>
+                    <input matInput type="text" [(ngModel)]="widgetName" [ngModelOptions]="{standalone: true}" autocomplete="off" placeholder="Widget Title"
+                      (ngModelChange)= "onVizNameChanged($event)"/>
+                    <i class="fas fa-pencil-alt edit-icon color-primary" matSuffix></i>
+                  </mat-form-field>
+              </div>
+          </div>
+      </div>
+
+      <!---- Content -->
+      <div class="flex-body relative" [ngClass]="{'faded': deleteRequestInProgress}" #analyticsVisBuilderContent>
+          <div class="row flex-body-content p-10-0"
+              *ngIf="(data.mode == 'edit' && vizSelected && vizSelected.widgetId) || data.mode == 'create'">
+
+              <!-- SideBar -->
+              <div class="col-3 analytics-sidebar p-l-25 p-r-0">
+                <puc-analytics-selection [mode]="data.mode" [type]="data.type" [selectedEntityId]="data.entityRef" [incomingTaglist]="taglist"
+                  [ccus]="data.ccus" [zones]="data.zones" [siteRef]="data.siteRef" [selectedVisualizationParameters]=vizSelected
+                  (tagChanged)="onTagChange($event)"
+                  (modeSwitched)="modeSwitched($event)" (scopeChanged)="onScopeChanged($event)" (widgetTypeChanged)="onWidgetTypeChanged($event)"
+                  (entitiesSelectionChangedEvt)="onEntitiesSelectionChanged($event)"></puc-analytics-selection>
+              </div>
+
+              <!-- Content -->
+              <div class="col-9 analytics-content">
+                  <div class="row h-100"
+                      *ngIf="buildType && (equips?.length || buildType == 'custom')">
+                      <div class="col-5 p-l-15 p-r-15 border-right d-flex flex-column">
+
+                        <ng-container *ngIf="!queryMode && buildType == 'builder'">
+                          <ul class="list-none">
+                            <li class="group">
+                              <div class="head d-flex align-items-center">
+                                  <span><b>Equips</b> <small *ngIf="equips.length > 0"> - {{equipsSelected}} / {{equips.length}}</small></span>
+                                  <mat-checkbox class="m-l-a" [disableRipple]="true" color="primary" [(ngModel)]="allEquips" [ngModelOptions]="{standalone: true}"
+                                      (change)="onNodeGroupChange($event)" [checked]="equipsSelected === equips.length">
+                                      Select All
+                                  </mat-checkbox>
+                              </div>
+                              <mat-form-field class="d-block" [floatLabel]="'never'">
+                                  <!-- <input matInput placeholder="Search Equip" [(ngModel)]="equipSearchText" autocomplete="off" /> -->
+                                  <input matInput placeholder="Search Equip" (keyup)="equipSearchText = searchEquip.value" autocomplete="off" #searchEquip/>
+
+                              </mat-form-field>
+                              <div class="node-content expanded">
+                                  <ul class="list-none">
+                                      <li [ngClass]="{'selected':(node.checked)}" (click)="onToggleNode(node)" class="node"
+                                        *ngFor="let node of equips | pucFilter:equipSearchText:'name'">
+                                          <span>{{node?.name}}</span>
+                                      </li>
+                                  </ul>
+                              </div>
+                            </li>
+                          </ul>
+                        </ng-container>
+
+                        <div *ngIf="queryMode || buildType == 'custom'">
+                          <textarea #queryElem class="query-textarea" [readonly]="buildType == 'builder'" autofocus spellcheck="false"
+                            [(ngModel)]="hayStackQuery" (ngModelChange)= "onCustomHaystackQueryEdited($event)"
+                            placeholder="Enter your query here" [ngModelOptions]="{standalone: true}">
+                          </textarea>
+                        </div>
+
+                        <button *ngIf="buildType == 'custom'" class="text-uppercase btn btn-outline-primary color-primary text-uppercase execute-query-btn m-t-24"
+                          [ngClass]="{'disabled': !hayStackQuery?.length}"
+                          [disabled]="!hayStackQuery?.length"
+                          (click)="executeCustomQuery(hayStackQuery)">
+                          <span *ngIf="!fetchingPoints">Execute Query</span>
+                          <span *ngIf="fetchingPoints">Executing ...</span>
+                        </button>
+                        <button *ngIf="buildType == 'builder'"  class="text-uppercase btn btn-outline-primary color-primary text-uppercase retrieve-btn m-t-24"
+                          [ngClass]="{'disabled': buildType == 'builder' && !selectedTags?.length}"
+                          [disabled]="buildType == 'builder' && !selectedTags?.length"
+                          (click)="retrievePoints()">
+                          <span *ngIf="!fetchingPoints">Retrieve points</span>
+                          <span *ngIf="fetchingPoints">Retrieving ...</span>
+                        </button>
+                      </div>
+
+                      <div class="col-7 p-l-15 p-r-15">
+                        <div *ngIf="points?.length > 0 && !fetchingPoints && !hasError" class="h-100">
+                          <div class="d-flex align-items-baseline">
+                              <span><b>Points</b> <small *ngIf="points?.length > 0"> - {{selectedPoints}} / {{points.length}}</small></span>
+                              <mat-form-field class="d-block m-l-25 chartNameField" [floatLabel]="'never'" *ngIf="selectedOption == 'oneChart'">
+                                  <input matInput placeholder="Chart Name" [(ngModel)]="chartName" [ngModelOptions]="{standalone: true}" (ngModelChange)= "chartNameChange($event)" autocomplete="off" />
+                              </mat-form-field>
+                              <mat-checkbox class="m-l-a" [(ngModel)]="selectAllPoints" (change)="onSelectAllChange($event)"
+                                  [disableRipple]="true" color="primary" [ngModelOptions]="{standalone: true}">
+                                  Select All
+                              </mat-checkbox>
+                          </div>
+                          <div class="d-flex m-t-10 m-b-10 align-items-center">
+                              <ul class="list-none tuner-radio-group d-flex d-flex-wrap">
+                                  <li class="tuner-radio-button" *ngFor="let option of visibleChartOptions;let i = index;">
+                                      <label>
+                                          <input type="radio" name="type" (ngModelChange)="onOptionChange($event)"
+                                              [(ngModel)]="selectedOption" [value]="option?.value" id="{{'radio-'+ i}}" />
+                                          <span class="radiobtn"></span>
+                                          <span>
+                                              {{option?.label}}
+                                          </span>
+                                      </label>
+                                  </li>
+                              </ul>
+                              <div [ngClass]="{'hide':(selectedOption == 'oneChart')}">
+                                  <puc-gradient-swatch [availableColorSet]="gradientSwatchSelections" [colorLabel]=''
+                                      [selectedGroup]="selectedGradientGroup" [isEdit]='true'
+                                      (colorSelectionChange)="colorSelectionChange($event)"></puc-gradient-swatch>
+                              </div>
+                          </div>
+                          <mat-form-field class="d-block" [floatLabel]="'never'">
+                              <input matInput placeholder="Search Point" [ngModelOptions]="{standalone: true}"
+                                  [(ngModel)]="searchText" autocomplete="off" />
+                          </mat-form-field>
+                          <div class="point-content">
+                              <ul class="list-none">
+                                  <cdk-virtual-scroll-viewport autosize [ngStyle]="{'height.px': viewAreaHeight - 164 > 320 ? 320 : viewAreaHeight - 164}" itemSize="12">
+                                      <li *cdkVirtualFor="let point of points | pucFilter:searchText:'name';trackBy: trackByPoints;"
+                                          class="node d-flex align-items-center" [ngClass]="{'selected':(point.checked)}"
+                                          (click)="onTogglePoint(point)">
+                                          <span class="text-truncate" title="{{point?.name}}">{{point?.name}}</span>
+                                          <span class="m-l-a inline-flex">
+                                              <div [ngClass]="{'hide':(selectedOption != 'oneChart')}">
+                                                  <puc-color-picker (colorSelectionChange)="onSelectColor($event,point)"
+                                                      [selectedColor]="point?.selectedColorSet">
+                                                  </puc-color-picker>
+                                              </div>
+
+                                              <puc-chart-picker [charts]="['lineChart', 'areaChart', 'barChartVert', 'dashed']"
+                                                  (activate)="onSelectChart($event,point)" [selectedChart]="point?.chartType">
+                                              </puc-chart-picker>
+                                          </span>
+                                      </li>
+                                  </cdk-virtual-scroll-viewport>
+                              </ul>
+                          </div>
+                        </div>
+                        <!-- Error Div -->
+                        <div *ngIf="hasError" class="p-t-20">
+                          <div class="h-100 warningTrendlineDiv d-flex justify-content-center">
+                            <i class="fas fa-exclamation-triangle warningIcon"></i>
+                            <div class="m-l-8">
+                              <div [innerHTML]="errMsg"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- No Points Div -->
+                        <div *ngIf="callMade && points?.length === 0" class="p-t-20">
+                          <div class="h-100 warningTrendlineDiv d-flex justify-content-center">
+                            <i class="fas fa-exclamation-triangle warningIcon"></i>
+                            <div class="m-l-10">
+                              <div>There are no points available for the current selection !</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div *ngIf="!hasError && !callMade && !fetchingPoints && points?.length === 0" class="p-t-20">
+                          <div class="h-100 warningTrendlineDiv d-flex justify-content-center">
+                            <i class="fas fa-exclamation-triangle warningIcon"></i>
+                            <div class="m-l-10">
+                              <div>Click on <b>{{buildType == 'builder' ? 'Retrieve points' : 'Execute Query'}}</b> button to get the relevant points!</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center" *ngIf="fetchingPoints">
+                          <img src="./assets/images/loader.gif" width="60" />
+                        </div>
+                    </div>
+                  </div>
+
+                  <!-- ends -->
+                  <div *ngIf="buildType && !equips?.length && hasError" class="p-t-20">
+                    <div class="h-100 warningTrendlineDiv d-flex justify-content-center">
+                      <i class="fas fa-exclamation-triangle warningIcon"></i>
+                      <div class="m-l-8">
+                        <div [innerHTML]="errMsg"></div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+
+      <!---- Delete Box -->
+      <div class="confirmDeleteBox" *ngIf="deleteRequestInProgress && globalEditMode">
+          <mat-progress-bar mode="indeterminate" *ngIf="serverDeleteInProgress"></mat-progress-bar>
+          <div>
+            <div class="h-100 warningTrendlineDiv d-flex justify-content-center">
+              <i class="fas fa-exclamation-triangle warningIcon"></i>
+              <p>Are you sure you want to delete <b>{{vizSelected.name}}</b>?</p>
+            </div>
+          </div>
+          <div class="confirmDeleteActions d-flex justify-content-center" [ngClass]="{'isDisabled': serverDeleteInProgress}">
+            <button mat-button color="primary" (click)="cancelDelete()" class="m-r-16">CANCEL</button>
+            <button mat-button color="primary" (click)="confirmDelete()">DELETE</button>
+          </div>
+      </div>
+
+      <!---- Actions Area -->
+      <div class="flex-footer d-flex justify-content-end align-items-center" [ngClass]="{'faded': deleteRequestInProgress}"
+        *ngIf="(data.mode == 'edit' && vizSelected && vizSelected.widgetId) || data.mode == 'create'">
+        <button class="text-uppercase btn btn-outline-primary color-primary text-uppercase"
+          (click)="onCloseDialog()">Cancel</button>
+
+        <button class="text-uppercase btn btn-outline-primary color-primary text-uppercase" *ngIf="data.mode == 'edit'"
+          [ngClass]="{'disabled' : selectedPoints === 0 || !hasChanges || hasError}" [disabled]="selectedPoints === 0 || !hasChanges || hasError"
+          (click)="saveVisualization('edit')">
+          <span *ngIf="!savingViz">Update Existing Visualization</span>
+          <span *ngIf="savingViz">Updating ...</span>
+        </button>
+
+        <!-- <button class="text-uppercase btn btn-outline-primary color-primary text-uppercase" *ngIf="data.mode == 'edit'"
+          [ngClass]="{'disabled' : !allFieldsSet}" [disabled]="!allFieldsSet" (click)="revertAndCreateNew()">Create as new
+          Visualization</button> -->
+
+        <button class="text-uppercase btn btn-outline-primary color-primary text-uppercase" *ngIf="data.mode == 'create'"
+        [ngClass]="{'disabled' : selectedPoints === 0 || !hasChanges || hasError}" [disabled]="selectedPoints === 0 || !hasChanges || hasError"
+        (click)="saveVisualization('create')">
+          <span *ngIf="!savingViz">Save Visualization</span>
+          <span *ngIf="savingViz">Saving ...</span>
+        </button>
+      </div>
+  </div>
+</form>

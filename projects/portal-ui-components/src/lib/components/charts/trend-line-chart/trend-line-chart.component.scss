@@ -1,0 +1,49 @@
+::ng-deep {
+    .trendTooltipOverlay {
+        fill: none;
+        pointer-events: all;
+        height: 100% !important;
+    }
+
+    .dashed {
+        stroke-dasharray: 5, 5;
+    }
+
+    .focus circle {
+        fill: none;
+        stroke: steelblue;
+    }
+    .chartToolTip {
+        font-family: "Lato", sans-serif;
+        white-space: nowrap;
+    }
+    // .referenceViewLine {
+    //     background-color: #333;
+    //     width: 1px;
+    //     border: none;
+    // }
+    .toolTipList li {
+        display: block;
+    }
+}
+.graph-content {
+    position: relative;
+    overflow: auto;
+    overflow-x: hidden;
+    // display: flex;
+    // align-items: center;
+}
+
+.graph-head {
+  margin: 12px 0px 0px 16px;
+
+  h3 {
+    font: 400 12px/28px Lato, sans-serif;
+    margin: 0 0 4px;
+  }
+}
+
+
+svg.trendlineData {
+  max-width: calc(100% + 100px);
+}

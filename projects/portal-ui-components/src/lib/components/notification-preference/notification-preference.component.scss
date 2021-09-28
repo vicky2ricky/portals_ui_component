@@ -1,0 +1,172 @@
+.user-management-table {
+    display: flex;
+    width: 100%;
+    padding: 0px;
+    box-sizing: border-box;
+    flex-direction: column;
+
+    ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+        background-color: var(--primary) !important; /* Red background for example */
+    }
+
+    ::ng-deep .mat-checkbox-frame {
+        border-width: 1px !important;
+        width: 14px !important;
+        height: 14px !important;
+    }
+  
+  
+  
+
+    .user-management-t-head,
+    .user-management-t-body {
+      display: block;
+    }
+    
+    .user-management-t-head {
+      background: rgba(0, 0, 0, 0.117647058823529);
+      padding: 2px 0px;
+      li {
+        font-size: 0.75em;
+        font-weight: 700;
+        justify-content: center;
+        border-right: 1px solid var(--line);
+        color: rgba(51, 51, 51, 0.87);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 15%;
+        &:first-child {
+            width: 25%; 
+        }
+       
+        &:last-child {
+          border-right: 1px solid transparent;
+        }
+      }
+    }
+    .d-row {
+      list-style: none;
+      padding-left: 0px;
+      margin: 0;
+      & {
+        //width: 100%;
+        //flex-basis: 15%;
+        display: flex;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        box-sizing: border-box;
+      }
+    }
+    .d-row li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 15%;
+        height: 35px;
+       
+        &:first-child {
+            width: 25%; 
+            font-size: 0.7rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        &:last-child {
+          border-right: 1px solid transparent;
+        }
+    }
+  }
+ 
+  
+  .user-management-t-body {
+    > ul {
+      &:nth-child(even) {
+        background-color: rgba(248, 249, 250, 1) !important;
+      }
+    }
+  }
+
+  .user-management-t-head,
+    .user-management-t-body {
+      display: block;
+    }
+    
+    .user-management-t-head {
+      background: rgba(0, 0, 0, 0.117647058823529);
+      padding: 8px 0px;
+      li {
+        font-size: 0.75em;
+        font-weight: 700;
+        justify-content: center;
+        border-right: 1px solid var(--line);
+        color: rgba(51, 51, 51, 0.87);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 10%;
+        &:first-child {
+            width: 25%; 
+        }
+        &:nth-child(4), &:nth-child(5) {
+            width: 20%;
+        }
+        &:last-child {
+          border-right: 1px solid transparent;
+         // flex-basis: 10%;
+          width: 15%;
+        }
+      }
+    }
+    .d-row {
+      list-style: none;
+      padding-left: 0px;
+      margin: 0;
+      & {
+        //width: 100%;
+        //flex-basis: 15%;
+        display: flex;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        box-sizing: border-box;
+      }
+    }
+    .d-row li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 10%;
+       
+        &:first-child {
+            width: 25%; 
+            font-size: 0.7rem;
+        }
+        &:nth-child(4), &:nth-child(5) {
+            width: 20%;
+        }
+        &:last-child {
+          border-right: 1px solid transparent;
+         // flex-basis: 10%;
+          width: 15%;
+        }
+    }
+    .list-style {
+        list-style: none;
+        padding-left: 0;
+    }
+  
+  .user-management-t-body {
+    > ul {
+      &:nth-child(even) {
+        background-color: rgba(248, 249, 250, 1) !important;
+      }
+    }
+  }

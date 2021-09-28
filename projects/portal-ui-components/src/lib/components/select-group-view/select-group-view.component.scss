@@ -1,0 +1,111 @@
+.selectorOption {
+    padding: 0 12px 0;
+  }
+  
+  ::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {
+    background-color: var(--hover-grey) !important;
+    width: 100%;
+    height: 1px !important;
+  }
+  
+  //mat-input focused color
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+      color: var(--hover-grey) !important;
+      height: 1px !important;
+  }
+  
+  
+  :host ::ng-deep .mat-form-field .mat-select-arrow{
+        box-sizing: border-box;
+        height: 6px !important;
+        width: 6px !important;
+        border-left: none !important;
+        border-right: 2px solid var(--primary) !important;
+        border-top: none !important;
+        border-style: solid;
+        border-color: var(--primary);
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+  
+  ::ng-deep .mat-select-panel {
+    min-width: 100% !important;
+    overflow:  hidden !important;
+  }
+  
+  .siteSelectorFormField {
+    position: relative;
+    // top: 40px;
+    width: 100%;
+    font-size: 13px;
+  
+    .mat-form-field-flex {
+      padding-top: .25em !important;
+    }
+  
+    ::ng-deep .mat-form-field-underline {
+      bottom: 1.1em !important;
+    }
+  }
+  
+  .selectionOptions {
+    
+      max-height: 280px;
+      margin-top: 50px;
+      overflow-y: auto;
+      padding-bottom: 100px;
+  
+      .mat-option {
+        height: 25px;
+        font-size: 13px;
+      }
+  }
+  
+  
+  .searchArea {
+    position: absolute;
+    width: 100%;
+    top: 0;
+  
+    ::ng-deep .mat-form-field-flex {
+      padding-top: 0 !important;
+      padding-left: 12px !important;
+      padding-right: 12px !important;
+      padding-bottom: 5px !important;
+    }
+    ::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {
+      background-color: var(--hover-grey) !important;
+      width: calc(100% - 24px);
+      margin-left: 12px;
+      margin-right: 12px;
+      height: 1px !important;
+    }
+  
+  //mat-input focused color
+    ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+        color: var(--hover-grey) !important;
+        height: 1px !important;
+    }
+  
+    
+    .searchFormField {
+      padding: 0px;
+      overflow: hidden;
+      box-shadow: none;
+    }
+    .appIcon {
+      font-size: .88rem;
+    }
+  
+    .appIcon {
+      font-size: .88rem;
+      color: var(--primary);
+    }
+  }
+  
+  .zeroSize {
+    font-size: 0px;
+    display: none;
+  }
+  

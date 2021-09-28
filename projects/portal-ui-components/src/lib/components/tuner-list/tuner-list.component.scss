@@ -1,0 +1,118 @@
+.tuner-values-list {
+    .tuner-value-info {
+        padding: 5px 10px !important;
+        position: relative;
+        &::after {
+            border-right: 1px solid #aaa;
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 14px;
+            right: 0;
+            top: 9px;
+        }
+        &:nth-child(3n),
+        &:last-child {
+            &::after {
+                border-right: 1px solid transparent;
+            }
+        }
+        &.gray {
+            background: rgba(248, 249, 250, 0.996078431372549);
+        }
+    }
+}
+
+.priority-manage {
+    justify-content: space-around;
+    align-items: center;
+}
+
+.reason-btn-grp {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 120px;
+    flex: 0 0 120px;
+    max-width: 120px;
+}
+
+.reason {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 calc(100% - 120px);
+    flex: 0 0 calc(100% - 120px);
+    max-width: calc(100% - 120px);
+
+    label {
+        position: absolute;
+        top: -12px;
+        left: 20px;
+        padding: 0px 5px;
+        z-index: 1;
+        background: var(--white);
+        &:before {
+            content: "\002A";
+            color: var(--danger);
+            font-weight: bold;
+            font-size: 1em;
+        }
+    }
+    textarea {
+        width: 100%;
+        border-radius: 5px;
+        min-height: 60px;
+        resize: none;
+        height: 100%;
+        padding: 5px;
+        &:focus,
+        &:hover {
+            outline: none;
+        }
+    }
+}
+.m-t-30 {
+    margin-top: 30px;
+}
+.m-l-0 {
+    margin-left: 0px;
+}
+.fas {
+    &.fa-search {
+        color: rgba(0, 0, 0, 0.54);
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+.fa-pencil-alt + .fa-redo-alt {
+    margin-left: 5px;
+    transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+}
+
+.update-btn {
+    margin-left: 0px;
+    margin-top: 30px;
+    min-width: 105px;
+    padding: 4px 0px;
+    font-size: 0.85em;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+    color: rgba(0, 0, 0, 0.54);
+}
+.mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 1px;
+}
+.tuner-list {
+    color: rgba(51, 51, 51, 0.6);
+    font-size: 1em;
+}
+
+:host .accordion__item__title {
+    border-bottom: 1px solid var(--line);
+}
+.tuners-list-container {
+    .accordion__item__body--open {
+        min-height: auto !important;
+    }
+}

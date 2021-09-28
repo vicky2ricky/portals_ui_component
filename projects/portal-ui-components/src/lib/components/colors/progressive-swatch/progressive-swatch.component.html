@@ -1,0 +1,48 @@
+<div class="content progressiveSwatch m-t-10 m-b-10">
+  <div class="selectedColorList">
+    <div *ngFor="let selection of selections" class="selectedColorItem wtSpaceNoWrap">
+      <div class="flexDisplayCentered baseSelection">
+        <div class="selected-color-box" (click)="showColorSelector(selection.value)">
+          <span class="color-box" *ngIf="selection.type === 'single'"
+            [ngStyle]="{'background-color' : selection.color}">
+          </span>
+          <span class="color-box" *ngIf="selection.type === 'gradient'"
+            [ngStyle]="{ 'background-image' :
+              linearGradient(gradientColorSet[selection.group]['stopColor0'], gradientColorSet[selection.group]['stopColor100']) }">
+          </span>
+        </div>
+        <label class="text-uppercase m-l-8 m-r-24 m-t-4">{{selection.label}}</label>
+
+        <ng-container *ngIf="isEdit">
+          <div class="swatch-container" *ngIf="showColorSwatchFor === selection.value">
+            <!-- to show the list of single colors -->
+            <ul class="list-none d-flex row text-center single-color-list">
+              <li class="color-box-list-item col-4" *ngFor="let colorSet of availableColorList;"
+                (click)="changeColorSelection('single', selection, colorSet)">
+                <i class="fa fa-check color-checked" *ngIf="colorSet === selection.color" aria-hidden="true"></i>
+                <span [ngStyle]="{'background-color' : colorSet}" class="color-box"></span>
+              </li>
+            </ul>
+            <!-- to show the list of gradient colors -->
+            <ul class="list-none d-flex row text-center gradient-color-list">
+              <li class="color-box-list-item" *ngFor="let colorSet of gradientColorSet | keyvalue"
+                (click)="changeColorSelection('gradient', selection, colorSet.key)">
+                <i class="fa fa-check color-checked" *ngIf="colorSet.key === selection.group" aria-hidden="true"></i>
+                <span class="color-box"
+                  [ngStyle]="{'background-image' : linearGradient(colorSet.value['stopColor0'], colorSet.value['stopColor100']) }">
+                </span>
+              </li>
+            </ul>
+          </div>
+        </ng-container>
+
+      </div>
+      <div class="progressives flexDisplayCentered" [ngClass]="{'flex-wrap' : wrapUp}">
+        <div *ngFor="let breakup of selection.progressive" class="flexDisplayCentered">
+          <div class="small-color-box" [ngStyle]="{'background-color' : breakup.color}"></div>
+          <label class="text-uppercase text-small m-l-8 m-r-16">{{breakup.label}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

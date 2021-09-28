@@ -1,0 +1,103 @@
+.cntr {
+    padding: 20px 0px 10px 10px;
+}
+.btns-ctnr {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0 0;
+    button {
+        padding: 0;
+    }
+}
+.mat-dialog-actions {
+    margin-bottom: 0 !important;
+}
+.muteStatus {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 10px;
+    .fas {
+        margin-right: 5px;
+        padding: 5px;
+        color: var(--primary);
+    }
+}
+
+::ng-dep .tooltip-container {
+    border: none !important;
+}
+
+.dateRangePopup {
+    z-index: 9999;
+    width: 220px;
+    background: white;
+    /* border: 1px solid; */
+    //box-shadow: 0px 0px 5px rgb(0 0 0 / 15%);
+    border-radius: 3px;
+}
+.heading-text {
+    font-size: 14px;
+    font-weight: bold;
+}
+.suffix-icon {
+    color: var(--primary);
+}
+.table-header {
+    background: rgba(235, 236, 237, 1);
+    margin-bottom: 5px;
+    div {
+        text-align: center;
+        font-size: 12px;
+        padding: 5px;
+    }
+    div:first-child {
+        border-right: lightgray solid 2px;
+    }
+}
+.scroll-ctnr {
+    overflow: auto;
+    max-height: 50vh;
+}
+.color-primary {
+    color: var(--primary);
+}
+::ng-deep {
+    puc-muted-alert-dialog {
+        .mat-expansion-indicator {
+            top: 4px !important;
+            &:after {
+                padding: 2px !important;
+                color: var(--primary);
+            }
+        }
+        .ranges {
+            button.active {
+                background-color: transparent !important;
+                color: black !important;
+            }
+            button {
+                &:hover {
+                    background-color: transparent !important;
+                }
+            }
+        }
+        mat-expansion-panel-header {
+            font-size: 11px !important;
+            height: 20px !important;
+        }
+        .mat-expansion-panel-body {
+            font-size: 11px;
+            padding: 0 !important;
+            .row:nth-child(odd) {
+                background-color: rgba(249, 249, 249, 1);
+            }
+        }
+    }
+}
+
+.p-5 {
+    padding: 3px;
+}

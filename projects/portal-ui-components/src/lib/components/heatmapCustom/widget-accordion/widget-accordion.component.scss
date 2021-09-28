@@ -1,0 +1,149 @@
+.custom-analytics-accordian {
+  padding: 0 0px 16px 0px;
+
+  &.giveSomeSpace {
+    margin-bottom: 16px;
+  }
+
+}
+
+.accordion-header {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: -16px; // to pull the widgets a bit towards the header
+
+  .dragHandle {
+    position: absolute;
+    top: 6px;
+    left: -11px;
+    text-shadow: 1px 1px 1px #ccc;
+    font-size: 1.2em;
+    opacity: 0;
+    cursor: move;
+  }
+
+  .noDragHandle {
+    font-size: 0px;
+    visibility: hidden;
+    position: absolute;
+    top: 6px;
+    left: -11px;
+    pointer-events: none;
+  }
+
+  .leftSection {
+    margin-top: 6px;
+    position: relative;
+    left: 8px;
+
+    .widgetTitle {
+      position: relative;
+      display: inline-block;
+
+      font-size: 0.8rem;
+      margin: 2px 0;
+      font-weight: 500;
+      color: #231f20;
+      text-transform: capitalize
+    }
+
+    .fa-globe-americas {
+      margin-left: 8px;
+      font-size: 13px;
+      opacity: .8;
+    }
+  }
+
+
+  .rightSection {
+    display: flex;
+    position: relative;
+
+    .settings-icon {
+      margin-right: 16px;
+      position: absolute;
+      right: 20px;
+
+      i.fa-cog {
+        font-size: 14px;
+        cursor: pointer;
+        opacity: .8;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+
+    .settings-ul {
+      position: absolute;
+      top: 100%;
+      right: 0px;
+      z-index: 1000;
+      min-width: 120px;
+      padding: 5px 0;
+      margin: 4px 0 0;
+      font-size: 13px;
+      text-align: left;
+      list-style: none;
+
+      background-color: var(--white);
+      background-clip: padding-box;
+      box-shadow: 1px 1px 5px 0px rgba(170, 170, 170, 0.9);
+
+      .settings-ul-li {
+        display: block;
+        clear: both;
+        font-weight: 400;
+        line-height: 1.42857143;
+        color: #333;
+        white-space: nowrap;
+
+        .label-name {
+          padding: 4px 10px;
+          font-size: 12px;
+
+          &:hover {
+            background: #eee;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .caret {
+      cursor: pointer;
+    }
+
+  }
+
+  &:hover {
+    .dragHandle {
+      opacity: 0.8;
+    }
+  }
+}
+
+
+.accordion-body {
+  height: 0;
+  overflow-x: hidden;
+  transition: ease-in-out 900ms height;
+  &.open {
+      min-height: 50px;
+      overflow-y: hidden;
+      margin-top: 16px;
+      height: auto;
+      transition: ease-in-out 900ms height;
+  }
+}
+
+
+.is-blur {
+  pointer-events: none;
+  filter: blur(2px);
+}

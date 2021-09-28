@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <clipPath id="clip-donut_chart">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="donut_chart" clip-path="url(#clip-donut_chart)">
+    <g id="noun_Graph_1012401" transform="translate(-8.298 56.59)">
+      <path id="Path_4" data-name="Path 4" d="M22.046,11.375V2.41A17.651,17.651,0,0,1,37.339,17.7H28.374a8.825,8.825,0,0,0-6.329-6.329Zm0,26.035A17.651,17.651,0,0,0,37.339,22.116H28.374a8.825,8.825,0,0,1-6.329,6.329ZM17.633,11.375V2.41a17.651,17.651,0,0,0,0,35V28.445a8.825,8.825,0,0,1,0-17.07Z" transform="translate(13 -51)" fill="#f3646a"/>
+    </g>
+  </g>
+</svg>

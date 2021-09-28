@@ -1,0 +1,41 @@
+
+<div class="customModal vacation-schedule">
+    <div class="modal-header customModal__header">
+        <!--<ul>
+        <li>
+            <h3>{{ vacationModalHeader }}</h3>
+        </li>
+    </ul>-->
+        <h3>{{ isEdit?'Edit Vacation Schedule':"Add Vacation Schedule" }}</h3>
+        <!--pru-->
+    </div>
+    <div class="vacation-details">
+        <div class="vacation-details__name">
+            <div class="vacation-details__input_box">
+                <input id="vacation_name" class="vacation-details__name__input" type="text"
+                    placeholder="Vacation Name" [(ngModel)]="vacationScheduleDetails.name"
+                    (input)="valueChange($event)" autocomplete="off">
+                <span id="clear_vacation_name" class="vacation-details__name__clear" (click)="clearData()">X</span>
+            </div>
+        </div>
+        <div class="vacation-details__calendar">
+            <ngx-daterangepicker-material #daterangepicker [isInvalidDate]="isInvalidDate" [linkedCalendars]="true"
+                class="vacation-details__calendar__daterangepicker" (choosedDate)="selectedDateRangeChange($event)"
+                [autoApply]="true">
+            </ngx-daterangepicker-material>
+        </div>
+        <div class="vacation-details__validation" *ngIf="validationMessage.length">
+            <div *ngFor="let errMsg of validationMessage" class="vacation-details__validation__message">
+                <i class="vacation-details__validation__message__icon fas fa-exclamation-triangle"></i>
+                <span [innerHtml]="errMsg">
+                </span>
+            </div>
+        </div>
+        <div class="vacation-details__buttongroup">
+            <button id="cancel_vacation_changes" class="vacation-details__buttongroup__cancel"
+                (click)="handleCancel()">CANCEL</button><br>
+            <button id="save_vacation_changes" class="vacation-details__buttongroup__save"
+                (click)="handleSave()">SAVE</button><br>
+        </div>
+    </div>
+</div>

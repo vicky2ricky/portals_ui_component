@@ -1,0 +1,19 @@
+<div class="accordion">
+    <div class="accordion__item">
+        <div class="accordion__item__title" [ngClass]="!isOpen ? 'divide' : ''">
+            <h3 id="accordian_{{graphId}}" (click)="activateDropdown()" [ngStyle]="titleStyle">
+                {{ blockTitle }} <sup *ngIf="showActive"><span  class="status">
+                    <i class="fas fa-circle" [class.active]="isActive"></i>
+                </span></sup>
+                <span class="caret">
+                    <i [ngClass]="(isOpen) ? 'fa fa-angle-down' : 'fa fa-angle-right'"></i>
+                </span>
+            </h3>
+        </div>
+        <div [ngClass]="(isOpen) ? 'accordion__item__body--open' : 'accordion__item__body'">
+            <div>
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</div>

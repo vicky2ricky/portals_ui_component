@@ -1,0 +1,62 @@
+<div class="fs-profile">
+    <div *ngIf="displayProfile == 'slider'" class="fs-profile__default">
+        <puc-user-intent-rangeslider *ngIf='checksliderdisplaycondition()' [sliderDisplay]='sliderDisplayFlag'
+            [min]='inputBuildingLimit.min' [max]='inputBuildingLimit.max' [checkForTemperature]="checkForTemperature" [step]='1' [zoneName]='zoneName'
+            (desiredTempsChanged)='desiredTempsChangedHandler($event)'>
+        </puc-user-intent-rangeslider>
+    </div>
+    <div *ngIf="displayProfile !== 'slider'" class="fs-profile__other">
+        <img [src]="displayProfile" />
+        <div *ngIf='profileShortName=="emr"' class="fs-profile__other--emr">
+            <div>{{energyReading.val}}</div>
+            <div>{{currentRate.val}}</div>
+        </div>
+        <div *ngIf='profileShortName=="pid"' class="fs-profile__other--pid">
+            <div class="fs-profile__other--pid--input">{{inputValue}} <span>{{inputValueUnit}}</span></div>
+            <div class="fs-profile__other--pid--output">{{outputValue}} <span>{{outputValueUnit}}</span></div>
+        </div>
+    </div>
+    <div *ngIf='profileShortName=="pid"'>
+
+        <div class="label">
+            <div class="d-flex">
+                <h3 class="highlight">{{ profileFormattedName }}</h3>
+                <div [class.online]="isOnline()" class="status margin-top-1"></div>
+              </div>
+            <div class="label">Status: <span class="value">
+                    <span [innerHTML]="zoneSettings?.equipStatusMessage?.val"></span>
+                </span></div>
+
+        </div>
+        <div class="label" *ngIf="zoneSettings && zoneSettings['lastUpdated'] && zoneSettings['lastUpdated'].hasOwnProperty('val')" >Last updated : <span class="value"
+            >{{" "+ dateFormat(zoneSettings.lastUpdated.val)}}</span></div>
+        <div class="label" *ngIf="loopOutputValue">{{"Loop Output"}} : <span class="value"
+            >{{loopOutputValue}}</span> <span>{{ " " +loopOutputUnit}}</span></div>
+
+        <div class="label" *ngIf="inputValue">{{"Input " + inputLabel}} : <span class="value"
+                >{{inputValue}}</span> <span>{{ " " +inputValueUnit}}</span></div>
+        <div class="label" *ngIf="outputValue">{{outputLabel}} : <span class="value"
+                >{{outputValue}}</span> <span>{{ " " +outputValueUnit}}</span></div>
+        <div class="label" *ngIf="offsetValue && outputLabel">{{"Offset " +outputLabel}} : <span
+                class="value">{{offsetValue}}</span><span>{{ " " +outputValueUnit}}</span></div>
+
+
+    </div>
+</div>
+<div *ngIf='profileShortName=="sense"'>
+    <div class="label m-t-30">
+        <div class="d-flex">
+            <h3 class="highlight">{{ profileFormattedName }}</h3>
+            <div [class.online]="isOnline()" class="status margin-top-1"></div>
+        </div>
+    </div>
+    <div class="label" *ngIf="zoneSettings && zoneSettings['lastUpdated'] && zoneSettings['lastUpdated'].hasOwnProperty('val')" >Last updated : <span class="value"
+        >{{" "+ dateFormat(zoneSettings.lastUpdated.val)}}</span></div>
+    <div class="label" *ngIf="th1Value">  {{th1Label}} : <span class="value">{{th1Value}}</span></div>
+    <div class="label" *ngIf="th2Value">  {{th2Label}} : <span class="value"
+            >{{th2Value}}</span></div>
+    <div class="label" *ngIf="analog1Value">  {{analog1Label}} : <span class="value"
+                >{{analog1Value}}</span></div>
+    <div class="label" *ngIf="analog2Value">  {{analog2Label}} : <span class="value"
+                    >{{analog2Value}}</span></div>
+</div>

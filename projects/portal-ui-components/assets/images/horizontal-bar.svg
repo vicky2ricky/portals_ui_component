@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <clipPath id="clip-horizontal_bar">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="horizontal_bar" clip-path="url(#clip-horizontal_bar)">
+    <g id="noun_bar_chart_1035312" data-name="noun_bar chart_1035312" transform="translate(-2.88 -2.88)">
+      <path id="Path_6" data-name="Path 6" d="M43.782,42.7H13.052V11.966a1.086,1.086,0,1,0-2.172,0V43.782a1.086,1.086,0,0,0,1.086,1.086H43.782a1.086,1.086,0,1,0,0-2.172Z" transform="translate(0)" fill="#b4b4b4"/>
+      <rect id="Rectangle_1" data-name="Rectangle 1" width="10.568" height="3.827" rx="1.913" transform="translate(15.258 15.953)" fill="#fab666"/>
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="29.119" height="3.827" rx="1.913" transform="translate(15.258 22.516)" fill="#f3646a"/>
+      <rect id="Rectangle_3" data-name="Rectangle 3" width="22.039" height="3.827" rx="1.913" transform="translate(15.258 29.084)" fill="#ffe066"/>
+      <rect id="Rectangle_4" data-name="Rectangle 4" width="14.642" height="3.827" rx="1.913" transform="translate(15.258 35.651)" fill="#fab666"/>
+    </g>
+  </g>
+</svg>

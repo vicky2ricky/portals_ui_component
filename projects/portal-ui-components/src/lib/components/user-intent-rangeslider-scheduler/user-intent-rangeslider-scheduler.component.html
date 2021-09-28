@@ -1,0 +1,36 @@
+<div #schedulerslider class="scheduler__slider">
+    <div *ngIf="!sliderDisplay" class="scheduler__slider__labels">
+        <div class='scheduler__slider__labels__flexalign'>
+
+            <div *ngIf="!sliderDisplay" id='noDataIcon'><img class="scheduler__slider__labels__noDataactive"
+                    src="../../../../assets/images/noDataSliderIcon.svg"></div>
+            <div class='scheduler__slider__labels__flexalign__flexrightalign'>
+
+                <div *ngIf="!sliderDisplay" id='noDataLabel'
+                    class='scheduler__slider__labels__noDatalabelinactiveclass'>Data Not Available</div>
+            </div>
+        </div>
+    </div>
+    <div class="scheduler__slider__component">
+        <div id="schedulerHeatingRange"></div>
+        <div id="schedulerCoolingRange"></div>
+        <div id="schedulerDeadbandRange"></div>
+        <div id="schedulerRangePointContainer">
+        </div>
+        <div id="schedulerMarkPointContainer">
+        </div>
+        <div id="schedulerHeatingdesiredtempbutton" (dragstart)="sliderDisplay"
+            (mousedown)="sliderDisplay && MouseDown($event)"
+            class="scheduler__slider__component__button scheduler__slider__component__heatingdesiredtempbutton">
+            <p id='heatingdesiredtemplabel' class='scheduler__slider__component__heatingdesiredtemplabel'>
+                {{sliderDisplay?heatingdesiredtempvalue:undefined}}</p>
+        </div>
+        <div id="schedulerCoolingdesiredtempbutton" (dragstart)="sliderDisplay"
+            (mousedown)="sliderDisplay && MouseDown($event)"
+            class="scheduler__slider__component__button scheduler__slider__component__coolingdesiredtempbutton">
+            <p id='coolingdesiredtemplabel' class='scheduler__slider__component__coolingdesiredtemplabel'>
+                {{sliderDisplay?coolingdesiredtempvalue:undefined}}</p>
+        </div>
+
+    </div>
+</div>

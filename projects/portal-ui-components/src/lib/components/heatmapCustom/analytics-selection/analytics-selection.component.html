@@ -1,0 +1,148 @@
+<div class="widget-configuration">
+
+    <p>Trend Chart Config</p>
+
+    <form novalidate class="widget-config-form" [formGroup]="analyticsSelectionForm">
+      <div class="m-t-10 field-control">
+          <label class="lbl">Select Build type</label><br />
+          <div class="btn-group d-flex d-flex-wrap m-t-10">
+              <ng-container *ngFor="let option of buildOptions">
+                  <button class="btn w-100" (click)="onBuildChange(option)"
+                      [ngClass]="{'btn-outline-primary color-primary':(f.buildType?.value === (option?.value) )}"
+                      value="{{option?.value}}">
+                      {{option?.label}}
+                  </button>
+              </ng-container>
+          </div>
+      </div>
+
+      <ng-template [ngTemplateOutlet]="warningTpl"></ng-template>
+      <ng-container *ngIf="f.buildType?.value == 'builder'">
+          <div class="m-t-16 field-control" *ngIf="f.buildType?.value && canSwitchScope">
+              <label class="lbl">Select Level</label><br />
+              <div class="btn-group d-flex m-t-10">
+                  <ng-container *ngFor="let option of scopeOptions">
+                      <button class="btn w-100" (click)="onScopeChange(option)"
+                          [ngClass]="{'btn-outline-primary color-primary':(f.scope?.value == (option?.value) )}"
+                          value="{{option?.value}}">
+                          {{option?.label}}
+                      </button>
+                  </ng-container>
+              </div>
+          </div>
+          <ng-template [ngTemplateOutlet]="warningTplscope"></ng-template>
+
+          <div class="m-t-16 field-control" *ngIf="f.scope?.value  == 'ccu'">
+            <ng-container *ngIf="showEntitySelector">
+              <mat-form-field class="d-block select-form-field w-100" [floatLabel]="'never'">
+                <mat-select panelClass="fs-mat-select" placeholder="Select Systems"
+                    formControlName="entities" (selectionChange)="entitiesSelectionChanged($event, 'ccu')" [multiple]="true">
+                    <mat-select-trigger *ngIf="selectedEntities.length > 0">
+                        {{ selectedEntities[0].name }}
+                        <span *ngIf="selectedEntities.length > 1" class="example-additional-selection"> & +
+                            {{selectedEntities.length - 1}}
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let ccu of ccus" [value]="ccu._id">
+                        {{ccu.name}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+            <ng-container *ngIf="!showEntitySelector">
+              <mat-form-field class="d-block w-100">
+                <mat-label class="lbl">System</mat-label>
+                <input matInput disabled [attr.value]="selectedEntityName">
+              </mat-form-field>
+            </ng-container>
+          </div>
+
+          <div class="m-t-16 field-control" *ngIf="f.scope?.value  == 'zone'">
+            <ng-container *ngIf="showEntitySelector">
+              <mat-form-field class="d-block select-form-field w-100" [floatLabel]="'never'">
+                <mat-select panelClass="fs-mat-select" placeholder="Select Zones"
+                    formControlName="entities" (selectionChange)="entitiesSelectionChanged($event, 'zone')" [multiple]="true">
+                    <mat-select-trigger *ngIf="selectedEntities.length > 0">
+                        {{ selectedEntities[0].name }}
+                        <span *ngIf="selectedEntities.length > 1" class="example-additional-selection"> & +
+                            {{selectedEntities.length - 1}}
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let zone of zones" [value]="zone._id">
+                        {{zone.name}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+            <ng-container *ngIf="!showEntitySelector">
+              <mat-form-field class="d-block w-100">
+                <mat-label class="lbl">Zone</mat-label>
+                <input matInput disabled [attr.value]="selectedEntityName">
+              </mat-form-field>
+            </ng-container>
+          </div>
+
+          <div class="m-t-16 field-control" *ngIf="(f.entities?.value?.length > 0)">
+              <label class="lbl">Select Tags</label><br />
+              <ng-select class="custom-select" [items]="tagList" color="primary" [multiple]="true"
+                  #tagSelect (add)="onTagSelect($event)" (remove)="onTagDeSelect($event)"
+                  (clear)="onTagsClear()" [searchFn]="searchTag" addTagText=""
+                  [clearOnBackspace]="true" [markFirst]="markFirst()" dropdownPosition="top"
+                  [clearSearchOnAdd]="false" formControlName="tags">
+              </ng-select>
+              <!-- <ng-select class="custom-select" [items]="tagList" color="primary" [multiple]="true"
+                  #tagSelect (add)="onTagSelect($event)" (remove)="onTagDeSelect($event)"
+                  (clear)="onClear()" [searchFn]="searchTag" addTagText="" [clearOnBackspace]="true"
+                  [markFirst]="markFirst()" dropdownPosition="top" [clearSearchOnAdd]="false"
+                  formControlName="tags">
+              </ng-select> -->
+          </div>
+      </ng-container>
+    </form>
+
+    <div class="m-t-10 field-control"
+      *ngIf="(f.entities?.value?.length > 0) && f.tags?.value?.length > 0 && buildType !== 'custom'">
+      <mat-slide-toggle class="slide-toggle" color="primary" disableRipple=true (change)="switchMode($event)">
+        Query
+      </mat-slide-toggle>
+    </div>
+
+    <ng-template #warningTpl>
+      <div class="row align-items-start m-t-10 m-b-10" *ngIf="buildType && showBuildChangeWarning">
+          <div class="col-2 text-center">
+              <i class="fa fa-exclamation-triangle color-primary fa-lg m-t-10"></i>
+          </div>
+          <div class="col-10 p-l-0 pre-wrap">
+              <p>Are you sure you want to change widget type to <b>{{tempBuildType?.label}} ?</b>
+              </p>
+              <p>Changes you made so far will be lost</p>
+              <div class="d-flex justify-content-end">
+                  <button class="btn btn-text" (click)="showBuildChangeWarning = false;">
+                      Cancel</button>
+                  <button class="btn btn-text" (click)="onBuildChange(tempBuildType, true)">
+                      Change</button>
+              </div>
+          </div>
+      </div>
+    </ng-template>
+
+    <ng-template #warningTplscope>
+      <div class="row align-items-start m-t-10 m-b-10" *ngIf="scope && showscopeChangeWarning">
+          <div class="col-2 text-center">
+              <i class="fa fa-exclamation-triangle color-primary fa-lg m-t-10"></i>
+          </div>
+          <div class="col-10 p-l-0 pre-wrap">
+              <p class="m-t-0">Are you sure you want to change Level to <b>{{tempscope?.label}} ?</b>
+              </p>
+              <p>Changes you made so far will be lost</p>
+              <div class="d-flex justify-content-end">
+                  <button class="btn btn-text" (click)="showscopeChangeWarning = false;">
+                      Cancel</button>
+                  <button class="btn btn-text" (click)="onScopeChange(tempscope, true)">
+                      Change</button>
+              </div>
+          </div>
+      </div>
+    </ng-template>
+
+</div>

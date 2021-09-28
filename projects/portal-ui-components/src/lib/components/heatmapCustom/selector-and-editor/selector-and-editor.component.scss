@@ -1,0 +1,161 @@
+
+.section {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+
+.closeButton {
+  position: absolute;
+  right: 0px;
+  top: 8px;
+  font-size: 12px;
+}
+
+
+.searchArea {
+  .mat-form-field-flex {
+      padding-top: 0px !important;
+  }
+}
+
+.entityInputFormField {
+  position: relative;
+  // top: 40px;
+  width: 300px;
+  font-size: 0.9rem;
+  margin-left: 1rem;
+  left: -315px; // Since the visibility is not being manipulated using ngIf
+
+  .mat-form-field-infix {
+      border: 0px;
+  }
+
+  .appIcon {
+      font-size: 0.88rem;
+      margin-left: 12px;
+      top: 1px;
+  }
+}
+
+.appIcon {
+  opacity: 0.5;
+  color: var(--primary);
+
+  position: relative;
+  top: -4px;
+
+  margin-left: 10px;
+
+  font-size: 0.72rem;
+
+  cursor: pointer;
+
+  &:hover {
+      opacity: 1;
+  }
+}
+
+
+::ng-deep {
+  .selector {
+    &.mat-select-panel {
+        position: relative;
+        top: 32px;
+
+        min-width: calc(100% + 12px) !important;
+        transform: translateX(4px) !important;
+
+        max-height: 320px;
+
+
+        .zeroSize {
+            font-size: 0px;
+
+            .mat-optgroup-label {
+                font-size: 0px;
+            }
+        }
+
+        .mat-optgroup-label {
+            font-weight: 700;
+            line-height: 25px;
+            height: 22px;
+            font-size: 12px;
+        }
+    }
+
+    .mat-option {
+        height: 25px !important;
+        font-size: 13px !important;
+
+        &.btnType {
+            font-size: 14px;
+            padding: 1.2rem 1rem;
+        }
+
+        .mat-option-text {
+            // word-break: break-word;
+            // white-space: break-spaces;
+            // line-height: 16px;
+        }
+    }
+  }
+
+}
+
+.selectorArea {
+  max-height: 240px;
+  overflow: auto;
+  min-width: 280px;
+}
+
+.headerSelector {
+  &.mat-select-panel {
+      transform-origin: 50% top 0px !important;
+      position: relative;
+      top: 30px;
+      left: 10%;
+      max-height: 336px;
+      overflow-y: hidden;
+
+      // min-width: calc(100% + 12px) !important;
+      transform: translateX(4px) !important;
+
+      .mat-optgroup-label {
+          line-height: 2em;
+          height: 2em;
+      }
+  }
+
+  .mat-option {
+      height: 30px !important;
+  }
+
+  .groupName {
+      .mat-checkbox-label {
+          text-transform: capitalize;
+          color: #000;
+      }
+  }
+}
+
+.customDropdownIcon {
+  font-size: 1rem;
+  position: relative;
+  top: -1px;
+  margin-right: 10px;
+  color: var(--primary);
+}
+
+.fitIn {
+  width: 120px !important;
+}
+
+
+.underlineDisable {
+  ::ng-deep .mat-form-field-underline {
+    height: 0;
+  }
+}

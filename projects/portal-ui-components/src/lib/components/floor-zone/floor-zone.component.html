@@ -1,0 +1,48 @@
+<div #parentparent *ngIf="onActiveFloorZoneIn && !uploadFloorPlanZoneIn && !noFloorZoneInPresent && imgWidth > 0" id="toget"
+    class="dropzone"
+    [ngStyle]="{'height':imgHeight+'px', 'width':imgWidth+'px', 'position': 'relative', 'background-image': 'url('+urlFloorZoneIn+')', 'background-repeat': 'no-repeat', 'background-position': 'center', 'background-size': '0% 0%', 'border':'1px solid black'}"
+    appMovableArea appDropzone (drop)="move(currentBox, dropzone1, $event)">
+    <img class="floor-plan-img" width="{{imgWidth}}" height="{{imgHeight}}" [src]="urlFloorZoneIn" />
+    <div class="box resize" resize appMovable appDroppable *ngFor="let existingZone of existingDroppedItemZoneIn"
+        (dragStart)="currentBox = existingZone" (dragEnd)="onDragEnd($event,existingZone)" #childchild
+        data-id="{{existingZone.zoneId}}" [setPosition]="{x: existingZone.spans[0], y: existingZone.spans[1]}"
+        [setSize]="{width: existingZone.spans[3], height: existingZone.spans[2]}">
+        <div class="zone-name" [matTooltip]="existingZone.main">{{ existingZone.main }}</div>
+        <span style="display: none">{{existingZone.spans[0]}}</span>
+        <span style="display: none">{{existingZone.spans[1]}}</span>
+        <span id="hei" style="display: none">{{ existingZone.spans[2] }}</span>
+        <span id="wid" style="display: none">{{ existingZone.spans[3] }}</span>
+        <span class="close-btn" (click)="removeBox(existingZone,existingDroppedItemZoneIn,true)">x</span>
+    </div>
+    <div class="box resize" resize *ngFor="let box of dropzone1" appDroppable (dragStart)="currentBox = box" appMovable
+        (dragEnd)="onDragEnd($event,box)" #childchild [ngStyle]="{'cursor': 'grabbing'}" data-id="{{box.dis.id}}"
+        [setPosition]="{x: box.position.x, y: box.position.y, set: box.set}">
+        <div class="zone-name" [matTooltip]="box.dis.dis">{{ box.dis.dis }}</div>
+        <span style="display: none">{{box.position.x}}</span>
+        <span style="display: none">{{box.position.y}}</span>
+        <span id="hei" style="display: none"></span>
+        <span id="wid" style="display: none"></span>
+        <span class="close-btn" (click)="removeBox(box,dropzone1,true)">x</span>
+    </div>
+</div>
+
+<div #parentparent *ngIf="!onActiveFloorZoneIn && uploadFloorPlanZoneIn && !noFloorZoneInPresent && imgWidth > 0" id="toget"
+    class="dropzone" 
+    [ngStyle]="{'height':imgHeight+'px', 'width':imgWidth+'px','position': 'relative', 'background-image': 'url('+urlFloorZoneIn+')', 'background-repeat': 'no-repeat', 'background-position': 'center', 'background-size': '100% 100%', 'border':'1px solid black', 'cursor': 'grabbing'}"
+    appMovableArea appDropzone (drop)="move(currentBox, dropzone1, $event)">
+    <div *ngFor="let box of dropzone1" appDroppable (dragStart)="currentBox = box" appMovable
+        (dragEnd)="onDragEnd($event,box)" class="box resize" resize #childchild data-id="{{box.dis.id}}"
+        [setPosition]="{x: box.position.x, y: box.position.y, set: box.set}">
+        {{ box.dis.dis }}
+        <span style="display: none">{{box.pos[0]}}</span>
+        <span style="display: none">{{box.pos[1]}}</span>
+        <span id="hei" style="display: none"></span>
+        <span id="wid" style="display: none"></span>
+        <span (click)="removeBox(box,dropzone1,true)">x</span>
+    </div>
+</div>
+
+<div *ngIf="!onActiveFloorZoneIn && !uploadFloorPlanZoneIn && noFloorZoneInPresent"
+    [ngStyle]="{'width':'100%','height':'100%', 'display':'flex','justify-content':'center','align-items':'center'}">
+    {{"Please Upload a Floor Plan"}}
+</div>

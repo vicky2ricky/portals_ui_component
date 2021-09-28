@@ -1,0 +1,58 @@
+<ul *ngIf="settings  && !isModbus" class="settings__wrapper d-flex">
+    <ng-container *ngFor="let tag of supportedtags; let i = index">
+        <div class="settings__wrapper__list"
+            *ngIf="labelObj[tag] && labelObj[tag].type && settings[tag] && isDataLoaded(settings[tag].val)"
+            [ngClass]="{'full-wdith': labelObj[tag].name == 'Status' || tag == 'lastUpdated','d-flex':(i%2 == 0 && i > 0)}">
+            <div>
+                <span class="settings-label">{{ labelObj[tag].name }} : </span>
+                <ng-container *ngIf="settings[tag] && labelObj[tag].type === 'text'">
+                    <span class="settings-value">{{ isDataLoaded(settings[tag].val) }} {{ labelObj[tag].unit }}</span>
+                </ng-container>
+                <ng-container class="zoneValue" *ngIf="settings[tag]  && labelObj[tag].type === 'datetime'">
+                    <span class="settings-value">{{ dateFormat(settings[tag].val) }} </span>
+                </ng-container>
+                <ng-container *ngIf="settings[tag] && labelObj[tag].type === 'html'">
+                    <i class="settings__html" [innerHTML]="isDataLoaded(settings[tag].val)"></i>
+                </ng-container>
+                <ng-container *ngIf="settings[tag] && labelObj[tag].type === 'select'">
+                    <puc-select #select
+                        [options]="options[labelObj[tag].options][tags.profileType] || options[labelObj[tag].options]['default']"
+                        [optionType]="labelObj[tag].options" [selectedOption]="settings[tag].val"
+                        (optionChange)="onModeChange($event)" [selectDisabled]="options[labelObj[tag].options]['dropDownSelectDisabled']"></puc-select>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+</ul>
+
+<ul *ngIf="settings && isModbus" class="settings__wrapper d-flex">
+    <ng-container *ngFor="let tag of supportedtags; let i = index">
+        <div *ngIf="settings[tag] && settings[tag]['data']" class="settings__wrapper__list" 
+            [ngClass]="{'full-wdith': tag == 'lastUpdated','d-flex':(i%2 == 0 && i > 0)}">
+            <div>
+                <span class="settings-label"  >{{ tag!='lastUpdated'?settings[tag]?.data?.shortDis:'Last Updated' }}    <span  *ngIf="settings[tag]?.data?.unit"> ({{settings[tag]?.data?.unit}})</span>: </span>
+                <ng-container *ngIf="settings[tag]['data'] && !(settings[tag]['data']['enum'] || settings[tag]['data']['options'])">
+                    <span class="settings-value">{{ tag!='lastUpdated'?isDataLoaded(settings[tag].val):dateFormat(settings[tag].val) }}</span>
+                </ng-container>
+                <ng-container *ngIf="settings[tag] && settings[tag]['data'] && (settings[tag]['data']['enum'] || settings[tag]['data']['options']) && !settings[tag]['data'].hasOwnProperty('writable')">
+                    <span class="settings-value" *ngIf="settings[tag]['data']['options']">{{ settings[tag]['data']['enum'][settings[tag].val * 1] }}</span>
+                    <span class="settings-value" *ngIf="settings[tag]['data']['enum']">{{ getEnumName(tag) }}</span>
+                </ng-container>
+                <ng-container *ngIf="settings[tag]['data'] && settings[tag]['data']['enum'] && settings[tag]['data'].hasOwnProperty('writable')">
+                    
+                    <select #select id="{{tag}}" [(ngModel)]="settings[tag].val" class="highlight-select" (change)="onChange(tag,select.value, settings[tag]['data'])">
+                        <option *ngFor="let option of settings[tag]['data']['enum'];let i=index;" value="{{option.value}}">{{option.name}}</option>
+                    </select>
+                
+                </ng-container>
+                <ng-container *ngIf="settings[tag] && settings[tag]['data'] && settings[tag]['data']['options'] && settings[tag]['data'].hasOwnProperty('writable')">
+                
+                    <select #select id="{{tag}}" [value]="settings[tag].val*1" class="highlight-select" (change)="onChange(tag,select.value, settings[tag]['data'])">
+                            <option *ngFor="let option of settings[tag]['data']['options']" value="{{option}}">{{(option).toFixed(1)}}</option>
+                    </select>
+                
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+</ul>

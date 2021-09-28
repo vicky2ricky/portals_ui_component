@@ -1,0 +1,36 @@
+<div class="custom-analytics-accordian" #analyticsAccordion
+  [ngClass]="{'giveSomeSpace' : isGlobal && !isOpen, 'is-blur' : deleteInProgress}" cdkDrag [cdkDragDisabled]="isDragDisabled">
+  <ng-container *ngIf="showAccordion">
+    <div class="accordion-header" (click)="activateDropdown()">
+      <i class="fas fa-grip-vertical color-primary noDragHandle m-r-10" aria-hidden="true" *ngIf="isGlobal" cdkDragHandle></i>
+      <i class="fas fa-grip-vertical color-primary m-r-10" aria-hidden="true" *ngIf="!isGlobal" cdkDragHandle
+        [ngClass]="{'noDragHandle' : isDragDisabled, 'dragHandle' : !isDragDisabled}"></i>
+      <div class="leftSection">
+        <span class="widgetTitle">{{widgetName}}</span>
+        <i class="fas fa-globe-americas" aria-hidden="true" *ngIf="isGlobal"></i>
+      </div>
+      <div class="rightSection">
+        <div class="settings-icon" *ngIf="!isGlobal && editAnalytics">
+          <i class="fa fa-cog relative ignore" fsClickOutside (outside)="showSettings = !$event"
+              [ngClass]="{'disabled':(!editAnalytics),'color-primary':(editAnalytics)}" aria-hidden="true"
+              [ngClass]="{'active':showSettings}" (click)="$event.stopPropagation();toggleSettings()"></i>
+            <ul *ngIf="showSettings" class="list-none settings-ul dropdown-menu ignore">
+              <li class="settings-ul-li" (click)="editWidget($event)">
+                <div class="label-name">Edit in Builder</div>
+              </li>
+              <li class="settings-ul-li" (click)="deleteWidget($event);">
+                <div class="label-name">Delete</div>
+              </li>
+            </ul>
+        </div>
+        <span class="caret">
+          <i [ngClass]="(isOpen) ? 'fa fa-angle-down' : 'fa fa-angle-right'"></i>
+        </span>
+      </div>
+    </div>
+    <div class="accordion-body" [ngClass]="(isOpen) ? 'open' : ''">
+      <puc-trend-line-wrapper [widget]=widget [isOpen]=isOpen [widgetWidth]=accordionWidth [heatmapConfigId]=heatmapConfigId
+        [customDateRange] = customDateRange (noApplicablePoints)="hideAccordion();" (dataRecieved)="dataRecieved($event);"></puc-trend-line-wrapper>
+    </div>
+  </ng-container>
+</div>

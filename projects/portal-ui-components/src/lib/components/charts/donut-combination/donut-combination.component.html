@@ -1,0 +1,22 @@
+<div class="content" *ngIf="isChartSetup">
+
+  <puc-pie-chart [consumptionData]=donutData baseChartClass="pieChart" [colorSet]=colorSet [chartWidth]=donutOnlyHeight
+    [chartHeight]=donutOnlyHeight donut=true showBreakup=true>
+  </puc-pie-chart>
+
+  <ng-container *ngIf="chartData.otherChartType == 'vertical'">
+    <puc-bar-chart-vertical [consumptionData]=otherChartData baseChartClass="barChartVertical" [colorSet]=colorSet
+      [chartWidth]=chartWidth [barWidth]=barWidth [chartHeight]="calcResidualHeight()" [editClass]=editClass></puc-bar-chart-vertical>
+  </ng-container>
+
+  <ng-container *ngIf="chartData.otherChartType == 'horizontal'">
+    <puc-bar-chart-horizontal [consumptionData]=otherChartData baseChartClass="barChartHorizontal" [colorSet]=colorSet
+      [chartWidth]=chartWidth [barWidth]=barWidth [chartHeight]="calcResidualHeight()"></puc-bar-chart-horizontal>
+  </ng-container>
+
+  <ng-container *ngIf="chartData.otherChartType == 'line'">
+    <puc-line-chart [consumptionData]=otherChartData [colorSet]=colorSet baseChartClass="lineChart"
+      [chartWidth]=chartWidth [chartHeight]="calcResidualHeight()" [editClass]=editClass></puc-line-chart>
+  </ng-container>
+
+</div>

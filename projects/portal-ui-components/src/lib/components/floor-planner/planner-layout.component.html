@@ -1,0 +1,42 @@
+<main class="floorGrid">
+  <section class="floorArea" *ngIf="!noFloorFlag && !floorPlanLoader"> 
+      <!-- <section class="controls">
+          <div class="saveArea">
+            <i class="fas fa-save actionIcon showHover" (click)="saveSelections()"></i>
+          </div>
+      </section> -->
+      <div id="floorplan" #floorPlan>
+          <canvas id="floorCanvas" #floorCanvas></canvas>
+          <div id="floorDiv">
+            <svg #floorSvg [attr.id]="floorSvgId"
+              [ngStyle]="{'width.px': this.floorCanvasBoundingRect?.width, 'height.px': this.floorCanvasBoundingRect?.height}">
+
+              <defs>
+                <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
+                  <path d="M 8 0 L 0 0 0 8" fill="none" stroke="#cdcdcd" stroke-width="0.5"/>
+                </pattern>
+                <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+                  <rect width="80" height="80" fill="url(#smallGrid)"/>
+                  <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#acacac" stroke-width="1"/>
+                </pattern>
+              </defs>
+
+              <rect width="100%" height="100%" fill="url(#grid)" *ngIf="showGrid"/>
+              <rect id="eventsArea" width="100%" height="100%" fill="none"></rect>
+            </svg>
+          </div>
+      </div>
+  </section>
+
+  <puc-confirmation-box [details] = userConfirmationDetails (userAction) = confirmUserAction($event)
+    *ngIf="askForConfirmation"></puc-confirmation-box>
+
+  <div class="fs-settings__upload-section__floor-wrapper__preview-image col-10" *ngIf="noFloorFlag">
+      <h2 class="nofloor-plan">Please Upload the Floor Plan</h2>
+  </div>
+  <div *ngIf="floorPlanLoader && !noFloorFlag">
+    <ngx-skeleton-loader [theme]="{ 'border-radius': '0', height: '450px', width :'800px'}"></ngx-skeleton-loader>
+  </div>
+</main>
+
+

@@ -1,0 +1,23 @@
+<!-- <div #pieChart id='pie'><svg></svg></div> -->
+<div id="pie">
+  <div class="content" style="width: auto;">
+    <svg>
+    </svg>
+  </div>
+  <div class="textArea" *ngIf="!donut || showBreakup">
+    <div>
+      <h2>{{total}} {{chartData?.unit}}</h2>
+      <small class="text-light text-uppercase">Total {{chartData?.category}}</small>
+    </div>
+    <div class="breakup" *ngIf="showBreakup && donut">
+      <small class="text-light text-uppercase">{{chartData?.groupBy}} {{chartData?.category}}</small>
+      <div class="details">
+        <div *ngFor="let param of chartData?.averages">
+          <span class="colorBox" [ngStyle]="{'background-color' : colorSet[param.label]}"></span>
+          <label class="text-uppercase">{{chartData?.partitions[param.label]}}</label>
+          <span class="value">{{ (param.value || param.value === 0)? param.value : '--' }} {{chartData?.unit}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<table [ngStyle]="{'width': tableWidth}">
+    <thead>
+        <tr>
+            <th *ngFor="let th of tableHead">
+                {{ th }}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of tableData; let i = index;" (click)="onRowClicked(row)">
+            <td *ngFor="let key of objectKeys(tableData[i])">{{ tableData[i][key] }}</td>
+        </tr>
+    </tbody>
+</table>

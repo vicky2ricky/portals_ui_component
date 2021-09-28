@@ -1,0 +1,88 @@
+.fs-profile {
+    &__other {
+        display: inline-flex;
+        img {
+            margin-left: 80%;
+            width: 300px;
+        }
+        &--emr {
+            margin-top: 45%;
+            div {
+                margin-top: 10px;
+                font-size: 20px;
+                color: #a1a1a1;
+            }
+            span {
+                margin-left: 4%;
+                color: var(--primary);
+            }
+        }
+        &--pid {
+            &--input {
+                margin-left: -130px;
+                margin-top: 25px;
+                font-size: 18px;
+                color: #a1a1a1;
+            }
+            &--output {
+                margin-left: -300px;
+                margin-top: 105px;
+                font-size: 18px;
+                color: #a1a1a1;
+            }
+            span {
+                color: var(--primary);
+                display: block;
+            }
+        }
+    }
+}
+.test {
+    color: #888888;
+    font-weight: 300;
+    font-size: 13px;
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.test1 {
+    font-size: 15px;
+    font-weight: 500;
+    padding-top: 15px;
+    color: black;
+    opacity: 0.87;
+    display: inline;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.highlight {
+    color: var(--primary);
+}
+
+span.value {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #888888;
+}
+
+.label {
+    line-height: 2rem;
+    font-size: 1rem;
+}
+
+.status {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: var(--light-grey);
+    margin-left: 5px;
+  }
+  .online {
+    background-color: var(--active-color);
+  }
+  .margin-top-1 {
+      margin-top: 1.4em;
+  }

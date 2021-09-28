@@ -1,0 +1,41 @@
+<div class="content m-t-10 m-b-10">
+  <div class="flexDisplayCentered selectedColorList">
+    <div class="selectedColorItem">
+      <ng-container *ngIf="showMainLabel">
+        <div class="selected-color-box" (click)="showColorSwatch = !showColorSwatch">
+          <ng-container *ngIf="availableColorSet && availableColorSet[selectedGroup]">
+            <span class="color-box-part" *ngFor="let color of availableColorSet[selectedGroup]"
+              [ngStyle]="{'background-color' : color, 'width.px' : 24 / availableColorSet[selectedGroup].length}"></span>
+          </ng-container>
+
+        </div>
+        <label class="text-uppercase m-l-8 m-r-24 m-t-4">{{colorLabel}}</label>
+      </ng-container>
+      <div class="breakup" *ngIf="colorData">
+        <div *ngFor="let item of colorData" class="tooltip">
+          <span class="color-box" [ngStyle]="{'background-color' : item.color}"></span>
+          <span class="label">{{item.label}}</span>
+
+          <span class="tooltiptext" *ngIf="item.tooltip">
+            {{item.tooltip}}
+          </span>
+        </div>
+      </div>
+
+      <ng-container *ngIf="isEdit">
+        <div class="swatch-container" *ngIf="showColorSwatch">
+          <ul class="list-none d-flex row text-center">
+            <li class="color-box-list-item" *ngFor="let colorSet of availableColorSet | keyvalue"
+              (click)="changeColorSelection(colorSet.key)">
+              <i class="fa fa-check color-checked" *ngIf="colorSet.key === selectedGroup" aria-hidden="true"></i>
+              <span class="color-box-part" *ngFor="let color of availableColorSet[colorSet.key]"
+                [ngStyle]="{'background-color' : color, 'width': 'calc((100% - 0px) /' + availableColorSet[selectedGroup].length + ')' }">
+              </span>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+</div>

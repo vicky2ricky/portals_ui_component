@@ -1,0 +1,87 @@
+<section class="tuners-list-container">
+    <div class="row">
+        <div class="col-md-12">
+            <mat-form-field class="tuners-search pull-right" [floatLabel]="'never'">
+                <input matInput placeholder="Search Tuners" autocomplete="off" [(ngModel)]="searchText" />
+                <i class="fas fa-search" matSuffix></i>
+            </mat-form-field>
+        </div>
+    </div>
+    <ul class="list-none p-l-0 tuner-list">
+        <ng-container *ngIf="hasGroup;else elsGrp">
+            <ng-container *ngFor="let item of tunersGroup | keyvalue">
+                <puc-accordion [blockTitle]="item.key" [isOpen]="true" [titleStyle]="accHeadStyle">
+                    <div class="row tuner-values-list">
+                        <div class="col-md-4 col-xs-6 col-sm-4 tuner-value-info"
+                            [ngClass]="{'gray': (((index+1)%6) == 0 || ((index+1)%6) == 4) || ((index+1)%6) == 5}"
+                            *ngFor="let data of item.value | pucFilter:searchText:'name';let even = even;let odd = odd;let index = index;"
+                            [pucAsyncLoader]="{fn:getValue(data)}">
+                            <div class="row ">
+                                <div class="col-md-8  text-truncate"
+                                    title="{{data?.name}} {{(data?.unit)?'('+(data.unit)+')':''}}">
+                                    {{data?.name}} {{(data?.unit)?'('+(data.unit)+')':''}}
+                                </div>
+                                <div class=" col-md-4 priority-manage d-flex">
+                                    <puc-loading-placeholder *ngIf="data?.isLoading" [width]="50" [height]="22">
+                                    </puc-loading-placeholder>
+                                    <span [ngClass]="{'color-primary':(data?.newVal)}">
+                                        {{(data?.newVal)?((data.newVal == 'N')?'-':(data.newVal)):
+                                                (data?.val)?(data?.val):(!data?.isLoading)?'-':''
+                                            }}
+                                    </span>
+                                    <i class="fas fa-pencil-alt fa-xs color-primary" (click)="edit(data)"></i>
+                                    <i class="fas fa-redo-alt fa-xs color-primary" *ngIf="data?.newVal"
+                                        (click)="reset(data);"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12"
+                            *ngIf="(item.value | pucFilter:searchText:'name').length == 0 && searchText">
+                            <p class="text-center m-10-a">No match found.</p>
+                        </div>
+                    </div>
+                </puc-accordion>
+            </ng-container>
+        </ng-container>
+        <ng-template #elsGrp>
+            <div class="row tuner-values-list">
+                <div class="col-md-4 col-xs-6 col-sm-4 tuner-value-info"
+                    [ngClass]="{'gray': (((index+1)%6) == 0 || ((index+1)%6) == 4) || ((index+1)%6) == 5}"
+                    *ngFor="let data of _tuners | pucFilter:searchText:'name' | pucOrderBy:'name';let even = even;let odd = odd;let index = index;">
+                    <div class="row ">
+                        <div class="col-md-8  text-truncate"
+                            title="{{data?.name}} {{(data?.unit)?'('+(data.unit)+')':''}}">
+                            {{data?.name}} {{(data?.unit)?'('+(data.unit)+')':''}}
+                        </div>
+                        <div class=" col-md-4 priority-manage d-flex">
+                            <span [ngClass]="{'color-primary':(data?.newVal)}">
+                                {{(data?.newVal)?(data?.newVal):
+                                        (data?.data?.val)?(data?.data?.val):(!data?.isLoading)?'-':''
+                                    }}
+                            </span>
+                            <i class="fas fa-pencil-alt fa-xs color-primary" (click)="edit(data)"></i>
+                            <i class="fas fa-redo-alt fa-xs color-primary" *ngIf="data?.newVal"
+                                (click)="reset(data);"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <div class="row m-t-30">
+                    <div class="relative reason">
+                        <label>Reason for Tuner Change</label>
+                        <textarea size="5" [(ngModel)]="reason"></textarea>
+                    </div>
+                    <div class="reason-btn-grp text-center">
+                        <button [disabled]="!reason || !(changedTuners?.length)"
+                            class="btn btn-outline-primary text-uppercase m-l-0 update-btn"
+                            (click)="update()">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ul>
+</section>

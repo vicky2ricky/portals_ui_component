@@ -1,0 +1,24 @@
+<div id="siteComparison">
+  <div class="content">
+    <svg>
+    </svg>
+  </div>
+  <!-- <div [innerHTML]="singleSiteMsg" *ngIf="!showChart" class="singleSiteMsg"></div> -->
+  <div class="sitesBarArea" *ngIf="isChartRendered && showChart"
+    [ngStyle]="{'width.px': chartWidth, 'margin-left.px': margin['left'], 'margin-right.px': margin['right']}">
+    <div class="sitesBar hasTooltip" *ngFor="let siteInfo Of chartData.data" (click)=siteClicked(siteInfo)>
+      <div class="details">{{siteInfo.name}} &nbsp; <span class="bold">{{siteInfo.value}} {{chartData.unit}}</span></div>
+      <div [ngStyle]="{
+        'width.%': siteInfo.value / max * 100 > 100 ? 100 : siteInfo.value / max * 100,
+        'background-color': siteInfo.value >= max ? (colorSet?.barFullColor): (colorSet?.barColor)
+      }"></div>
+      <ul class="tooltiptext">
+        <li><label>Total {{chartData.category}}</label><span class="value">{{siteInfo.value}} {{chartData.unit}}</span>
+        </li>
+        <li *ngFor="let floor of siteInfo?.floors">
+          <label>{{floor.label}}</label><span class="value">{{floor.value}} {{chartData.unit}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

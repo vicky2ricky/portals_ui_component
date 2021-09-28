@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <clipPath id="clip-vertical_bar">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="vertical_bar" clip-path="url(#clip-vertical_bar)">
+    <g id="noun_stacked_bar_chart_624278" data-name="noun_stacked bar chart_624278" transform="translate(215 -241)">
+      <path id="Path_8" data-name="Path 8" d="M11.611,40H5V34.167h6.611Zm0-15.944H5v8.556h6.611ZM21.333,26h-7V40h7Zm0-11.667h-7V24.444h7Zm9.333,21.778h-7V40h7Zm-7-1.556h7V5h-7Zm9.722-2.333V40H40V32.222Zm0-12.056v10.5H40v-10.5Z" transform="translate(-212 244)" fill="#f3646a"/>
+    </g>
+  </g>
+</svg>

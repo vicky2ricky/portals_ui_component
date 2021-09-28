@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <clipPath id="clip-area_chart">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="area_chart" clip-path="url(#clip-area_chart)">
+    <g id="noun_Area_Chart_1596642" data-name="noun_Area Chart_1596642" transform="translate(-5.996 45)">
+      <g id="Group_1" data-name="Group 1" transform="translate(13.996 -37)">
+        <path id="Path_1" data-name="Path 1" d="M3.148,1H1V35.434H35.431V33.282H3.148Z" transform="translate(-0.996 -1)" fill="#b4b4b4"/>
+        <path id="Path_2" data-name="Path 2" d="M15.989,7,3,13.2v10.34H33.3V7L22.482,13.2Z" transform="translate(1.148 6.755)" fill="#f3646a"/>
+        <path id="Path_3" data-name="Path 3" d="M22.482,8.2,15.989,2,3,8.2v8.023L16.422,9.817l6.406,6.121L33.3,9.92V2Z" transform="translate(1.148 0.068)" fill="#fab666"/>
+      </g>
+    </g>
+  </g>
+</svg>

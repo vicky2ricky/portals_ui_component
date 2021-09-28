@@ -1,0 +1,18 @@
+<div class="modal">
+    <div class="modal__body">
+        <div class="modal__body__title" #modalHeader>
+            <ng-content select="div.modal-header"></ng-content>
+        </div>
+        <div class="modal__body__content">
+            <span class="modal__body__content__inner-title">
+                {{ title }}
+            </span>
+            <div #modalContent>
+                <ng-content select="div"></ng-content>
+            </div>
+            <div class="modal__body__footer" *ngIf="isFixed && footerActive != 0">
+                <button (click)="hideModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

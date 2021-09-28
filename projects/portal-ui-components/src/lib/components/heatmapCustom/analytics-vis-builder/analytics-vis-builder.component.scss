@@ -1,0 +1,532 @@
+$faded-bg: var(--hover-grey);
+
+.pam-builder-form {
+
+  &.inlineMode {
+    margin-top: 8px;
+  }
+
+  .flex-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .widget-right-selections {
+    display: flex;
+    align-items: center;
+    justify-items: flex-end;
+  }
+
+  .m-t-a {
+    margin-top: auto;
+  }
+
+  .query-textarea {
+    margin: 10px 0px 0px;
+    box-shadow: none;
+
+    width: 100%;
+    height: 320px;
+
+    border: 1px solid #ddd;
+
+    padding-left: 8px;
+    padding-bottom: 16px;
+    resize: none;
+  }
+
+  textarea[readonly] {
+    background-color: #efefef;
+  }
+
+  .execute-query-btn {
+    min-width: 150px;
+    margin-top: auto;
+    margin-left: 10px;
+  }
+
+  .tooltiptext {
+    &::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-top: 8px solid #444;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      left: 50%;
+      bottom: -7px;
+      transform: translateX(-50%);
+    }
+
+    min-width: 100px;
+    top: -20px;
+    background-color: #444;
+    color: var(--white);
+    text-align: center;
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-size: 11px;
+    position: absolute;
+    z-index: 1;
+  }
+}
+
+.flex-head {
+  background: #ddd;
+  height: 40px;
+
+  > .row {
+    min-height: 50px;
+  }
+}
+
+.p-0-20 {
+  padding: 0px 20px;
+}
+
+.p-r-0 {
+  padding-right: 0px;
+}
+
+.seperator {
+  transform: scale(1.1);
+  margin-top: -5px;
+}
+
+.btn:disabled {
+  color: var(--light-grey);
+  border-color: var(--light-grey);
+}
+
+.flex-footer {
+  // border-top: 1px solid var(--line);
+  padding: 20px;
+}
+
+.flex-body {
+  height: 500px;
+  overflow-y: auto;
+  font-size: 14px;
+
+  .flex-body-content {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    .analytics-sidebar {
+      border-right: 1px solid var(--line);
+    }
+
+    .analytics-content {
+      .group {
+        .head {
+          padding: 5px 0px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        .node-content {
+          -moz-transition: height 0.5s;
+          -ms-transition: height 0.5s;
+          -o-transition: height 0.5s;
+          -webkit-transition: height 0.5s;
+          transition: height 0.5s;
+          height: 0;
+          overflow: hidden;
+
+          ul {
+            margin-top: -10px;
+          }
+
+          &.expanded {
+            height: auto;
+            padding-top: 10px;
+            max-height: 320px;
+            // margin-bottom: 24px;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+              width: 0px;
+              height: 0;
+              transition: height 0.15s ease-out;
+            }
+          }
+        }
+      }
+
+      .point-content {
+        max-height: 320px;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+          width: 0px;
+          height: 0;
+          transition: height 0.15s ease-out;
+        }
+      }
+
+      .node {
+        padding: 4px 10px;
+        border-radius: 2px;
+        color: #333;
+        font-size: 13px;
+
+        &:hover {
+          background:rgba(var(--primary-rgb), 0.2);
+          cursor: pointer;
+        }
+
+        &.selected {
+          background: rgba(var(--primary-rgb), 0.2);
+          &:hover {
+            background: rgba(var(--primary-rgb), 0.2);
+            cursor: pointer;
+          }
+        }
+      }
+
+      .d-block {
+        display: block;
+      }
+
+      .m-l-a {
+        margin-left: auto;
+      }
+
+      .tuner-radio-group {
+        label {
+          display: block;
+          position: relative;
+          font-size: 13px;
+          padding-left: 25px;
+          cursor: pointer;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          text-transform: capitalize;
+
+          input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+
+            &:checked ~ .radiobtn {
+              background-color: inherit;
+            }
+
+            &:checked ~ .radiobtn:after {
+              display: block;
+              background: var(--primary);
+            }
+          }
+
+          .radiobtn {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 14px;
+            width: 14px;
+            transform: translateY(-50%);
+            background-color: var(--white);
+            margin-top: 2px;
+            border-radius: 50%;
+            border: 1px solid var(--primary);
+
+            &:after {
+              content: "";
+              position: absolute;
+              top: 2px;
+              left: 2px;
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background: var(--white);
+            }
+          }
+        }
+      }
+
+      .tuner-radio-button {
+        margin: 5px;
+      }
+
+      .inline-flex {
+        display: inline-flex;
+      }
+
+      fs-color-component {
+        position: inherit;
+      }
+
+      .border-right {
+        border-right: 1px solid var(--line);
+      }
+    }
+
+    // width: calc(100% - 40px);
+  }
+
+  .pam-builder-sidebar {
+    border-right: 1px solid var(--line);
+  }
+
+  .footer-container {
+    flex-shrink: 0;
+  }
+
+  .chart-container {
+    flex: 1 1 auto;
+  }
+}
+
+.btn-group {
+  .btn {
+    border: 1px solid var(--line);
+    border-radius: 0px;
+
+    &.btn-outline-primary {
+      color: var(--primary);
+      border-color: var(--primary) !important;
+    }
+  }
+
+  .btn + .btn {
+    border: 1px solid var(--line);
+    margin-left: 0px;
+    border-radius: 0px;
+  }
+
+  .btn + .btn:not(.btn-outline-primary) {
+    border-left: 0px;
+  }
+}
+
+::ng-deep .flex-head {
+  // .mat-form-field-underline {
+  //   display: none;
+  // }
+
+  .no-input {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 2px 10px;
+    font-weight: 500;
+    width: 320px;
+    margin-top: -6px;
+    // font-size: 1rem;
+    .mat-input-element {
+      font-weight: 500;
+      height: 20px;
+      width: 100%;
+      padding-bottom: 4px;
+      padding-right: 20px;
+      text-transform: capitalize;
+    }
+    .mat-form-field-suffix {
+      display: none;
+    }
+    &:hover,
+    &:focus {
+      .mat-input-element {
+        border-bottom: 1px solid var(--light-grey);
+      }
+
+      .mat-form-field-suffix {
+        display: block;
+        margin-left: -12px;
+        position: relative;
+        top: -4px;
+      }
+    }
+
+    .mat-form-field-infix {
+      border-top: 0px;
+    }
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0px;
+      .mat-form-field-underline {
+        bottom: 0px;
+        height: 0px;
+
+        .mat-form-field-ripple {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .mat-select-value {
+    overflow: inherit;
+  }
+
+  // .mat-form-field-wrapper {
+  //   padding-bottom: 0px;
+  // }
+
+  .mat-form-field-infix {
+    border-top: 0px;
+  }
+
+  .mat-select-arrow-wrapper {
+    display: none;
+  }
+}
+
+.d-block {
+  display: block;
+}
+
+::ng-deep {
+  mat-form-field.select-form-field {
+    .mat-select-value {
+      overflow: inherit !important;
+    }
+  }
+
+  .pam-builder-form {
+    .faded {
+      pointer-events: none;
+      filter: blur(2px);
+
+      mat-form-field.select-form-field .mat-form-field-infix,
+      .node.selected {
+        background: #{$faded-bg} !important;
+      }
+
+      .ng-value-container .ng-value {
+        color: var(--white) !important;
+      }
+
+      .radiobtn {
+        border-color: #797979 !important;
+      }
+
+      .ng-select.ng-select-multiple
+        .ng-select-container
+        .ng-value-container
+        .ng-value,
+      .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background,
+      input[type="radio"]:checked ~ .radiobtn:after,
+      .mat-checkbox-checked.mat-primary .mat-checkbox-background {
+        background: #797979 !important;
+      }
+
+      .ng-clear-wrapper,
+      .ng-arrow-wrapper,
+      .mat-select-arrow-wrapper,
+      .ng-value-icon {
+        display: none !important;
+      }
+
+      .btn-group button.btn.btn-outline-primary {
+        color: #797979 !important;
+        border-color: #797979 !important;
+      }
+    }
+  }
+
+  mat-form-field.select-form-field {
+    .mat-form-field-infix {
+      border-top: 5px solid transparent;
+    }
+  }
+
+  puc-color-picker {
+    display: block;
+    margin-right: 10px;
+  }
+
+  puc-chart-picker,
+  puc-color-picker {
+    .swatch-container {
+      margin-left: -40px;
+    }
+  }
+
+  puc-gradient-swatch {
+    .content {
+      min-height: auto;
+    }
+
+    .swatch-container {
+      right: 0;
+    }
+  }
+}
+
+// commented this code because it's not showing point list properly
+cdk-virtual-scroll-viewport {
+  // overflow: visible;
+  contain: initial;
+}
+:host
+  ::ng-deep
+  cdk-virtual-scroll-viewport
+  .cdk-virtual-scroll-content-wrapper {
+  contain: inherit;
+  position: relative;
+}
+.point-content {
+  .node {
+    position: relative;
+    overflow: visible;
+  }
+}
+
+textarea[readonly] {
+  background-color: #efefef;
+}
+
+.warningTrendlineDiv {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0.8;
+  color: #444;
+  position: relative;
+  // padding-left: 24px;
+  box-sizing: border-box;
+
+  font-size: 14px;
+  line-height: 18px;
+
+  .warningIcon {
+    color: var(--primary);
+    opacity: 0.6;
+  }
+}
+
+.confirmDeleteBox {
+  position: absolute;
+  background-color: #eaeaea;
+  width: 100%;
+  bottom: 0px;
+  padding: 0px;
+  z-index: 1;
+
+  .warningTrendlineDiv {
+    font-size: 16px;
+    line-height: 20px;
+
+    .warningIcon {
+      margin-right: 12px;
+    }
+  }
+
+  .confirmDeleteActions {
+    margin-bottom: 8px;
+    margin-top: -6px;
+
+  }
+}

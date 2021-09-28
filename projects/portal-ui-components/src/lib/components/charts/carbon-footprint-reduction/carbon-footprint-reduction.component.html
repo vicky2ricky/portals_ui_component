@@ -1,0 +1,34 @@
+<div class="content carbonReduction"
+  [ngStyle] = "{'width.px': chartWidth, 'height.px': chartHeight}">
+  <div class="firstRow" *ngIf="!(chartData?.data.electricitySavings == undefined)">
+    <div class="icon">
+      <puc-electricty-icon [size]="30" [color]="colorSet?.electricitySavings"></puc-electricty-icon>
+    </div>
+    <div class="text">
+      <label class="text-light text-uppercase small">{{chartData?.mappings?.electricitySavings}}</label>
+      <div class="value" >
+        <ng-container *ngIf="((chartData?.data?.electricitySavings !=  '') && (chartData?.data?.electricitySavings !=  null));else naTpl;">
+          {{chartData.data.electricitySavings | number: '1.2-2'}}
+        <span class="text-light small">of Carbon</span>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="secondRow" *ngIf="!(chartData?.data.gasSavings == undefined)">
+    <div class="icon">
+      <puc-gas-icon [size]="30" [color]="colorSet?.gasSavings"></puc-gas-icon>
+    </div>
+    <div class="text">
+      <label class="text-light text-uppercase small">{{chartData?.mappings?.gasSavings}}</label>
+      <div class="value">
+        <ng-container *ngIf="((chartData?.data?.gasSavings !== '') && (chartData?.data?.gasSavings !== null));else naTpl;">
+          {{chartData?.data?.gasSavings | number: '1.2-2'}}
+        <span class="text-light small">of Carbon</span>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <ng-template #naTpl>
+    N.A
+  </ng-template>
+</div>

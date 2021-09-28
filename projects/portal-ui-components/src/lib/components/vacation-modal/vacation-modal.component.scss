@@ -1,0 +1,117 @@
+:host ::ng-deep {
+    ngx-daterangepicker-material.vacation-details__calendar__daterangepicker {
+      .md-drppicker::-webkit-scrollbar {
+        width: 0 !important;
+      }
+      .md-drppicker {
+        overflow: -moz-scrollbars-none;
+        -ms-overflow-style: none;
+      }
+      .md-drppicker {
+        margin: auto !important;
+        display: flex;
+        justify-content: left;
+        width: auto !important;
+        box-shadow: none;
+      }
+    }
+  } 
+
+  .vacation-details {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    &__input_box {
+      display: flex;
+      border-bottom: 1px solid #c8bbbb;
+    }
+    &__name {
+      //flex: 10%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+  
+      &__input {
+        border: none;
+        width: 100%;
+        outline: none;
+        padding: 4px;
+      }
+      &__clear {
+        cursor: pointer;
+      }
+    }
+  
+    &__calendar {
+      margin-top: 10px;
+      //flex: 80%;
+      //padding-top: 20px;
+      // display: flex;
+      // justify-content: center;
+      // margin: 18px;
+      // padding-left: 17%;
+    }
+  
+    &__validation {
+      flex: 5%;
+      margin: 5px;
+      &__message {
+        margin: 5px;
+        &__icon {
+          font-size: 25px;
+          color: var(--primary);
+          padding-right: 10px;
+        }
+      }
+    }
+  
+    &__buttongroup {
+      display: flex;
+      //flex: 5%;
+      //margin-top: auto;
+      justify-content: flex-end;
+      padding: 15px;
+      &__cancel {
+        background: transparent;
+        color: var(--primary);
+        border: none;
+        outline: none;
+        font-size: 16px;
+        cursor: pointer;
+        &:after {
+          content: "|";
+          color: gray;
+          font-size: 19px;
+          line-height: 0px;
+          margin-left: 13px;
+        }
+        &:hover{
+          background-color: rgba(var(--primary-rgb), 0.2)
+        }
+      }
+      &__save {
+        background: transparent;
+        color: var(--primary);
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 16px;
+        &:hover{
+          background-color: rgba(var(--primary-rgb), 0.2)
+        }
+      }
+    }
+  }
+  
+  .customModal {
+    &__header {
+      background-color: rgba(238, 239, 239, 0.7);
+      padding: 18px 15px;
+      border-bottom: 1px solid #e5e5e5;
+      margin-right: 3px;
+      h3 {
+        margin: 0;
+      }
+    }
+  }

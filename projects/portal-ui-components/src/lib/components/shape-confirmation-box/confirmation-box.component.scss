@@ -1,0 +1,23 @@
+.confirmationBox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #f5f5f5;
+  padding: 8px 12px;
+
+  p {
+    margin-top: 6px;
+    margin-bottom: 4px;
+    font-size: 13px;
+
+    &.title {
+      font-size: 14px;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

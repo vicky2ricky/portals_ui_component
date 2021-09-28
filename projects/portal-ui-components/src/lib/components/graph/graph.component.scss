@@ -1,0 +1,64 @@
+::ng-deep {
+    // text {
+    //     fill: #000000 !important;
+    //     opacity: 0.5;
+    // }
+
+    .grid line {
+        stroke: #ddd !important;
+        z-index: -1;
+        stroke-opacity: 0.5;
+    }
+
+    g.axis.axis--y text {
+        fill: var(--white);
+    }
+
+    g.axis.axis--y--right text {
+        fill: #000000 !important;
+        opacity: 0.5;
+        font-size: 10px;
+    }
+
+    span.tooltip {
+        display: block;
+        position: absolute;
+        text-align: left;
+        width: 260px;
+        color: var(--white);
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 5px 15px;
+        background: rgba(0, 0, 0, 0.8);
+        border: 0px;
+        border-radius: 5px;
+        border-top-left-radius: 0px;
+        pointer-events: none;
+        opacity: 0.7;
+        z-index: 1000;
+        box-sizing: border-box;
+        &::before {
+            content: " ";
+            height: var(--barHeight);
+            background: transparent;
+            width: 1px;
+            position: absolute;
+            left: -8px;
+            top: 0;
+            box-sizing: border-box;
+            border-left: 1px solid #000;
+        }
+        i {
+            font-size: 7.5px;
+            line-height: 8px;
+            font-style: normal;
+            display: block;
+            padding-bottom: 3px;
+            letter-spacing: 1.3px;
+        }
+    }
+
+    div#graph-wrapper {
+        position: relative;
+    }
+}

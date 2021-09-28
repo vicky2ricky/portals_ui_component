@@ -1,0 +1,70 @@
+.settings__wrapper {
+    // width: 65%;
+    padding-left: 0px;
+    width: 85%;
+    margin: 0 auto;
+    &__list {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding: 7px 0px;
+        &.full-wdith {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+    }
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.settings__html {
+    font-style: normal;
+    text-transform: capitalize;
+    font-size: 15px;
+    color: #949a99;
+}
+
+.settings-value {
+    color: #949a99;
+}
+
+.justify-content-end {
+    justify-content: flex-end !important;
+}
+.d-flex {
+    display: flex;
+    width: 100%;
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+}
+@media screen and (max-width: 1366px) {
+    .settings__wrapper {
+        .settings__wrapper__list {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+            max-width: 100%;
+            -webkit-box-pack: start !important;
+            justify-content: flex-start !important;
+        }
+    }
+}
+
+.settings-label {
+    font-size: 16px;
+}
+
+.settings-value {
+    font-size: 15px;
+}
+
+.highlight-select {
+    color: var(--primary);
+    border: none !important;
+}
